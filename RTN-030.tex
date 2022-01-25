@@ -1,4 +1,4 @@
-\documentclass[DM,authoryear,toc]{lsstdoc}
+\documentclass[DM,lsstdraft,authoryear,toc]{lsstdoc}
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
 \input{meta}
 
@@ -28,7 +28,8 @@ William O'Mullane and Russ Allbery and Richard Dubois and KT. Lim
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-This document will replace LDM-324 for the operations era. It covers data security and recovery, threats and mechanisms for dealing with them. Where possible it will refer to other documents for details.
+This document covers data security and recovery, threats and mechanisms for dealing with them. Where possible it will refer to other documents for details.
+This replaces LDM-324 for the operations era.
 }
 
 % Change history defined here.
@@ -55,11 +56,16 @@ This document will replace LDM-324 for the operations era. It covers data securi
 \renewcommand{\refname}{} % Suppress default Bibliography section
 \bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
 
+%NIST compliance from google sheet
+\section{Compliance with NIST800-171} \label{ap:compliance}
+\input{compliance}
+
 % Make sure lsst-texmf/bin/generateAcronyms.py is in your path
 %\section{Acronyms} \label{sec:acronyms}
 %\input{acronyms.tex}
 % If you want glossary uncomment below -- comment out the two lines above
 \printglossaries
+
 
 
 
