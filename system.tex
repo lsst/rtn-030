@@ -1,4 +1,4 @@
-\section{System description}
+\section{System description} \label{sec:desc}
 
 \VRO produces around 20TB of astronomical data per night for the 10 year \gls{LSST}
 Data are processed in \gls{SLAC}, \gls{IN2P3} and ROE.
@@ -6,7 +6,7 @@ A publicly available alert stream emanates from the \gls{USDF} at \gls{SLAC}.
 Processing is the responsibility's of \gls{RDP} department while Quality Assurance is carried out under \gls{RPF} department.
 
 The Rubin \gls{Operations} Plan \citeds{RDO-018} gives more details.
-The USDF specification is in \citeds{DMTN-189}.
+The USDF specification is in \citeds{DMTN-189} but some architecture details are provided in \secref{sec:arc}.
 
 
 
@@ -29,7 +29,11 @@ Each site has its own security policies (need doc refs) \action{RD,GS,FH}{Mar 20
 
 \subsection{Data access}
 After a short period of encumbrance image and derived data are made available to all
-data rights holders as defined in \citeds{LDO-13}
+data rights holders as defined in \citeds{LDO-13}.
+
+Front end data access via the \gls{RSP} will be hosted on a cloud provider such as Google.
+Thus not requiring community science users to have SLAC accounts.
+
 
 
 

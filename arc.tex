@@ -1,0 +1,110 @@
+%ENclave text from KT  https://docs.google.com/document/d/1apNSWtIpbS7aCitaF_K0JXLAAY9PvCEmmvnNvHmecdk/edit#heading=h.nwgy0freb3zv
+
+
+\section{System architecture} \label{sec:arc}
+The overall system architecture is available in \citeds{LDM-148}.
+Details on the USDF specifications are given in \citeds{DMTN-189}.
+\action{GS,FH}{March 2022}{Should we have Specs like DMTN-189 for UK and FRdF ?}
+
+\secref{sec:desc} gives a high level overview of the system, architecturally we look
+at this as a set of enclaves.
+As images are processed in the Prompt and Offline Production enclaves, their resulting data products are stored in the Archive enclave and made available to the DAC enclave where data rights holders can access and analyze them.
+In addition, Rubin Observatory staff will use the Development/Integration enclave to maintain the Observatory's software tools and systems and to develop new versions of them.
+
+These enclaves are further described here and for each a series of subsections explore :
+
+
+\begin{enumerate}
+\item Threats and Security infrastructure
+\item Disaster recovery
+\end{enumerate}
+
+\subsection{Prompt Enclave}
+
+The Prompt enclave receives images from the Observatory facilities in Chile via a Long Haul Network connection.
+It stores these and processes them into Prompt data products of three main types:
+alerts for things that have moved or changed, measurement catalogs, and processed images.
+The alerts can be further subdivided into \emph{streak} alerts for objects that have moved a long distance and \emph{non-streak} alerts for all other objects.
+Measurements in the catalogs follow the same subdivision. Images may be Commissioning images used for testing and characterizing the Observatory systems, normal science images without significant \emph{streaks}, or delayed science images that do contain significant \emph{streaks}.
+
+\emph{Streak} alerts are transmitted to an Alert Vetting System (AVS) located at a Trusted Broker Facility at  Lawrence Livermore National Lab.
+\emph{Non-streak} alerts and \emph{streak} alerts approved by the AVS are to be published to the world at large within 60 seconds of the original raw image being taken.
+Normal science images are made available to data rights holders in the DAC after an 80 hour embargo period.
+Delayed science images, as identified by the AVS, and any unapproved \emph{streak} measurements taken from them are made available after a 10 day embargo period. Commissioning images are made available to data rights holders after a 30 day embargo period.
+
+All Prompt data products are checked for quality by automated systems but also by human operators from the Rubin Observatory staff, who have access to all images and data products in order to perform this function.
+
+\subsubsection{ Threats and Security infrastructure}
+The obvious threat surfaces here are :
+\begin{enumerate}
+\item Transmission of Data from Chile. IPSec built into the routers will be used on the LHN. \citeds{DMTN-108} discusses threats in this realm a little more.
+\item Transmission to LLNL.  This will be over internet using TLS.
+\item Staff access for QA. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{RD}{March 2022}{ Need ref to SLAC security polices for users .. i.e. FACTS and all that .. }
+\item QA tools. The web accessible QA tools should have a threat analysis although they will be behind SLAC VPN and 2FA.
+\end{enumerate}
+
+\subsubsection{Disaster recovery}
+All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
+In the case of a total wipe out of the OGA systems use of Chef, docker etc allow redeployment rapidly.
+See also the SLAC Rubin disaster recovery plan. \action{RD}{March 22}{Need a SLAC disaster recover plan}.
+
+
+\subsection{ Offline Production  Enclave}
+Each year (or more frequently), the Offline Production enclave takes the raw images accumulated to date in the Archive and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the Archive and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the FrDF and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
+
+
+\subsubsection{ Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+
+\subsection{ Archive  Enclave}
+The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the Archive. As the permanent scientific record of the survey, no more than 1% of the raw images or telemetry may be lost or corrupted.
+
+To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
+
+\subsubsection{ Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+
+
+\subsection{ USDF Data Access Center Enclave}
+Data rights holders will use the services and systems in this enclave to work with the survey data products.
+It is therefore a general-purpose scientific computing facility. Generally users will interact with the Rubin Science Platform (RSP), which is composed of a web-based Portal Aspect providing a guided user interface for accessing and analyzing the data, a Notebook Aspect providing an interactive, flexible, programming-oriented interface, and an API Aspect providing an programmable access service.
+Users of the DAC may connect from anywhere in the world over the Internet; all such users will be authenticated before accessing any RSP service.
+The RSP is hosted on a cloud service, currently  Google Cloud Platform.
+
+The DAC retrieves the released data products from the Archive Enclave via protocols and services authenticated at a service account level only. While end-user identities may be included for audit and accounting purposes, fundamentally the DAC exists to provide access to all Archive contents.
+
+\subsubsection{ Threats and Security infrastructure}
+The RSP is a major attack surface for the DAC.
+Hosting it on a cloud provider reduces risk considerably.
+\citeds{SQR-041} provides a risk assessment for the RSP.
+\citeds{DMTN-193} provides a more in depth web risk analysis.
+
+Backend archive services could provide another attack surface.
+These are governed by SLAC security.
+\action{RD}{March 22}{Reference for security of archive services }
+
+\subsubsection{Disaster recovery}
+For user  spaces we rely on cloud provider redundancy/backup/recovery.
+
+Our data is cached a full copy is always held at the USDF hence any Rubin data at the DAC is expendable.
+
+\subsection{ Chile Data Access Center Enclave}
+\subsubsection{ Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+\subsection{Development and Integration  Enclave}
+Rubin Observatory and USDF staff will use this enclave to build and test new versions of software and services to be deployed in the other enclaves.
+
+\subsubsection{Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+
+\subsection{FrDF Processing  Enclave}
+\subsubsection{Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+\subsection{UKDF Processing  Enclave}
+\subsubsection{Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
