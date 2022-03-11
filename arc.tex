@@ -41,33 +41,49 @@ The obvious threat surfaces here are :
 \item Transmission to \gls{LLNL}.  This will be over internet using TLS.
 \item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{RD}{March 2022}{ Need ref to SLAC security polices for users .. i.e. FACTS and all that .. }
 \item QA tools. The web accessible QA tools should have a threat analysis although they will be behind SLAC \gls{VPN} and 2FA.
+\item The for the initial 10 days (30 in commissioning) after acquisition the data is maintain on encrypted disks with in the restricted \gls{OGA} rack.
 \end{enumerate}
 
 \subsubsection{Disaster recovery}
 All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
 In the case of a total wipe out of the \gls{OGA} systems use of Chef, docker etc allow redeployment rapidly.
 See also the \gls{SLAC} Rubin disaster recovery plan. \action{RD}{March 22}{Need a \gls{SLAC} disaster recover plan}.
-
+The back up for the embargoed data is the Chile OGA rack.
 
 \subsection{ Offline Production  \gls{Enclave}}
 Each year (or more frequently), the Offline Production enclave takes the raw images accumulated to date in the Archive and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the Archive and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the \gls{FrDF} and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
 
 
 \subsubsection{ Threats and Security infrastructure}
+\begin{itemize}
+\item Data could be intercepted in transfer between sites, however this is only performed after the embargo period hence the security risk is low.
+\item Malicious users could disrupt data or processing.
+We are using standard tooling from \gls{HEP} which has been in use for many years and gives a level confidence of their suitability in this scientific endeavor.
+Still internal users remain a major risk - we maintain an inclusive project and try to avoid disgruntled team members.
+\end{itemize}
 \subsubsection{Disaster recovery}
-
+Post embargo FrDF keeps a full copy of the raw data.
 
 \subsection{ \gls{Archive}  Enclave}
-The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}. As the permanent scientific record of the survey, no more than 1% of the raw images or telemetry may be lost or corrupted.
+The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
+As the permanent scientific record of the survey, no more than 1\% of the raw images or telemetry may be lost or corrupted.
 
 To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
 
+We intend to have a hybrid access model for the archive where  the \gls{RSP} users and user processing will be on Google cloud while the data resides at SLAC. A cache of images will be held on Google with a dedicated client pulling needed images from SLAC to google.
+
+
 \subsubsection{ Threats and Security infrastructure}
+
+\begin{itemize}
+\item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC i for processing and archive and the more public facing \gls{RSP}.
+\end{itemize}
 \subsubsection{Disaster recovery}
+Post embargo FrDF keeps a full copy of the raw data.
 
 
 
-\subsection{ USDF \gls{Data Access Center} Enclave}
+\subsection{ USDF \gls{DAC} Enclave}
 Data rights holders will use the services and systems in this enclave to work with the survey data products.
 It is therefore a general-purpose scientific computing facility. Generally users will interact with the Rubin Science Platform (\gls{RSP}), which is composed of a web-based Portal Aspect providing a guided user interface for accessing and analyzing the data, a Notebook Aspect providing an interactive, flexible, programming-oriented interface, and an API Aspect providing an programmable access service.
 Users of the DAC may connect from anywhere in the world over the Internet; all such users will be authenticated before accessing any \gls{RSP} service.
@@ -90,25 +106,50 @@ For user  spaces we rely on cloud provider redundancy/backup/recovery.
 
 Our data is cached a full copy is always held at the \gls{USDF} hence any Rubin data at the DAC is expendable.
 
-\subsection{ Chile \gls{Data Access Center} Enclave}
+\subsection{ Chile \gls{DAC} Enclave}
+This proposed DAC in Chile is covered in \cite{LDM-572}.
+We will not start work on this until near the start of operations.
 \subsubsection{ Threats and Security infrastructure}
+
+\begin{itemize}
+\item The Chile DAC is within the Recinto data center and covered by AURA/COS security measures.\item All Rubin traffic is run through a security appliance (currently Zeek).
+\item Selected Chilean users have access to the DAC. We will keep the DAC and the users confined with least privileges. We will use a caching mechanism analogous to the Cloud DAC system to restrict access to the object store for the external users.
+\item All access will be via \gls{RSP} pods and hence containerized - escalation potential from in side the container will be carefully monitored.
+\end{itemize}
 \subsubsection{Disaster recovery}
 
 \subsection{Development and Integration  \gls{Enclave}}
 Rubin Observatory and \gls{USDF} staff will use this enclave to build and test new versions of software and services to be deployed in the other enclaves.
 
 \subsubsection{Threats and Security infrastructure}
+
+\begin{itemize}
+\item Developers have a higher level of access than most users.
+This is a necessary and accepted risk.
+\item All developers must adhere to  SLAC access rules e..g FACTS checking etc.
+\end{itemize}
+
 \subsubsection{Disaster recovery}
+SLAC keep tape backups.
+
+All code is deployed using Chef or containers and hence fairly easily recoverable in case of catastrophic failure.
+
 
 
 \subsection{FrDF Processing  \gls{Enclave}}
+50\% of \gls{DRP} will be done at IN2P3.
+A full back up of the raw data will also be held there.
 \subsubsection{Threats and Security infrastructure}
+IN2P3 have their own cyber security procedures which will be adhered to.
 \subsubsection{Disaster recovery}
+All Raw data is also at SLAC and can be resent over a period of time.
 
 \subsection{UKDF Processing  \gls{Enclave}}
+25\% of processing will be done on \gls{IRIS}.
 \subsubsection{Threats and Security infrastructure}
+UKDF have their own cyber security procedures which will be adhered to.
 \subsubsection{Disaster recovery}
-
+All Raw data is at IN2P3 and can be resent over a period of time.
 
 
 \subsection{External entities}
