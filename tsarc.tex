@@ -1,0 +1,31 @@
+\section{Telescope and Site  System architecture} \label{sec:tsarc}
+
+ We concern our selves here mainly with the software architecture of telescope and site,
+this includes the control system but also the controlled devices and various test stands.
+
+The control system architecture is given in \citeds{LSE-150}.
+Broadly this is a message bus architecture with  various controllable components such as the Camera, Environmental Control, etc. attached to it.
+The components can receive control messages and telemetry from the bus by listening to various queues.
+The script queue component allows for orchestrated commanding of various components.
+
+This set may be seen for the Main Telescope as well as the Auxiliary Telescope.
+In addition there is a test stand in the Base and one in Tucson which have physical DAQ hardware to emulate the camera and can simulate many other physical components for testing the control system.
+
+We consider these systems under the same headings used in \secref{sec:dparc}.
+
+
+
+
+
+\subsection{Summit Control System}
+\subsubsection{Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+\subsection{Base Test Stand}
+\subsubsection{Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
+\subsection{Tucson Test Stand}
+\subsubsection{Threats and Security infrastructure}
+\subsubsection{Disaster recovery}
+
