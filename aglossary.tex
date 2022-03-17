@@ -11,6 +11,7 @@
 \newglossaryentry{Butler} {name={Butler}, description={A middleware component for persisting and retrieving image datasets (raw or processed), calibration reference data, and catalogs}}
 \newacronym{COS} {COS} {Center \gls{Operations} Services}
 \newacronym{CS} {CS} {citizen science}
+\newacronym{CSC} {CSC} {Commandable \gls{SAL} Component}
 \newacronym{CUI} {CUI} {Controlled Unclassified Information}
 \newglossaryentry{Camera} {name={Camera}, description={The LSST subsystem responsible for the 3.2-gigapixel LSST camera, which will take more than 800 panoramic images of the sky every night. SLAC leads a consortium of Department of Energy laboratories to design and build the camera sensors, optics, electronics, cryostat, filters and filter exchange mechanism, and camera control system}}
 \newglossaryentry{Center} {name={Center}, description={An entity managed by AURA that is responsible for execution of a federally funded project}}
@@ -18,6 +19,7 @@
 \newglossaryentry{Compliance} {name={Compliance}, description={Adherence to the laws, regulations, award terms and conditions, specifications, and internal policies applicable to the LSST Project}}
 \newglossaryentry{Construction} {name={Construction}, description={The period during which LSST observatory facilities, components, hardware, and software are built, tested, integrated, and commissioned. Construction follows design and development and precedes operations. The LSST construction phase is funded through the NSF MREFC account}}
 \newacronym{DAC} {DAC} {\gls{Data Access Center}}
+\newacronym{DAQ} {DAQ} {Data Acquisition System}
 \newacronym{DCR} {DCR} {\gls{Differential Chromatic Refraction}}
 \newacronym{DIA} {DIA} {\gls{Difference Image Analysis}}
 \newglossaryentry{DIAObject} {name={DIAObject}, description={A DIAObject is the association of DIASources, by coordinate, that have been detected with signal-to-noise ratio greater than 5 in at least one difference image. It is distinguished from a regular Object in that its brightness varies in time, and from a SSObject in that it is stationary (non-moving)}}
@@ -40,6 +42,7 @@
 \newglossaryentry{Difference Image} {name={Difference Image}, description={Refers to the result formed from the pixel-by-pixel difference of two images of the sky, after warping to the same pixel grid, scaling to the same photometric response, matching to the same PSF shape, and applying a correction for Differential Chromatic Refraction. The pixels in a difference thus formed should be zero (apart from noise) except for sources that are new, or have changed in brightness or position. In the LSST context, the difference is generally taken between a visit image and template. }}
 \newglossaryentry{Difference Image Analysis} {name={Difference Image Analysis}, description={The detection and characterization of sources in the Difference Image that are above a configurable threshold, done as part of Alert Generation Pipeline}}
 \newglossaryentry{Differential Chromatic Refraction} {name={Differential Chromatic Refraction}, description={The refraction of incident light by Earth's atmosphere causes the apparent position of objects to be shifted, and the size of this shift depends on both the wavelength of the source and its airmass at the time of observation. DCR corrections are done as a part of DIA}}
+\newglossaryentry{Director} {name={Director}, description={The person responsible for the overall conduct of the project; the LSST director is charged with ensuring that both the scientific goals and management constraints on the project are met. S/he is the principal public spokesperson for the project in all matters and represents the project to the scientific community, AURA, the member institutions of LSSTC, and the funding agencies}}
 \newglossaryentry{DocuShare} {name={DocuShare}, description={The trade name for the enterprise management software used by LSST to archive and manage documents}}
 \newglossaryentry{Document} {name={Document}, description={Any object (in any application supported by DocuShare or design archives such as PDMWorks or GIT) that supports project management or records milestones and deliverables of the LSST Project}}
 \newacronym{EPO} {EPO} {\gls{Education and Public Outreach}}
@@ -64,14 +67,18 @@
 \newacronym{LPM} {LPM} {LSST Project Management (Document \gls{Handle})}
 \newacronym{LSE} {LSE} {LSST \gls{Systems Engineering} (Document Handle)}
 \newacronym{LSST} {LSST} {Legacy Survey of Space and Time (formerly Large Synoptic Survey Telescope)}
+\newglossaryentry{LSST Corporation} {name={LSST Corporation}, description={An Arizona 501(c)3 not-for-profit corporation formed in 2003 for the purpose of designing, constructing, and operating the LSST System. During design and development, the Corporation stewarded private funding used for such essential contributions as early site preparation, mirror construction, and early data management system development. During construction, LSSTC will secure private operations funding from international affiliates and play a key role in preparing the scientific community to use the LSST dataset}}
 \newglossaryentry{LSST Project Office} {name={LSST Project Office}, description={Official name of the stand-alone AURA operating center responsible for execution of the LSST construction project under the NSF MREFC account}}
+\newacronym{LSSTC} {LSSTC} {\gls{LSST Corporation}}
 \newacronym{LSSTPO} {LSSTPO} {\gls{LSST Project Office}}
 \newacronym{MREFC} {MREFC} {\gls{Major Research Equipment and Facility Construction}}
 \newglossaryentry{Major Research Equipment and Facility Construction} {name={Major Research Equipment and Facility Construction}, description={the NSF account through which large facilities construction projects such as LSST are funded}}
 \newacronym{NAT} {NAT} {Network Address Translation}
 \newacronym{NCSA} {NCSA} {National \gls{Center} for Supercomputing Applications}
 \newacronym{NIST} {NIST} {National Institute of Standards and Technology (USA)}
+\newacronym{NOAO} {NOAO} {National Optical Astronomy Observatories (USA)}
 \newacronym{NSF} {NSF} {\gls{National Science Foundation}}
+\newacronym{NTS} {NTS} {NCSA Test Stand}
 \newglossaryentry{National Science Foundation} {name={National Science Foundation}, description={primary federal agency supporting research in all fields of fundamental science and engineering; NSF selects and funds projects through competitive, merit-based review}}
 \newacronym{OGA} {OGA} {Other Government Agencies}
 \newacronym{OSS} {OSS} {Observatory System Specifications; \gls{LSE}-30}
@@ -91,6 +98,7 @@
 \newglossaryentry{RSP} {name={RSP}, description={Rubin Science Platform}}
 \newacronym{RTN} {RTN} {Rubin Technical Note}
 \newglossaryentry{Review} {name={Review}, description={Programmatic and/or technical audits of a given component of the project, where a preferably independent committee advises further project decisions, based on the current status and their evaluation of it. The reviews assess technical performance and maturity, as well as the compliance of the design and end product with the stated requirements and interfaces}}
+\newacronym{SAL} {SAL} {Service Abstraction Layer}
 \newacronym{SLAC} {SLAC} {\gls{SLAC National Accelerator Laboratory}}
 \newglossaryentry{SLAC National Accelerator Laboratory} {name={SLAC National Accelerator Laboratory}, description={ A national laboratory funded by the US Department of Energy (DOE); SLAC leads a consortium of DOE laboratories that has assumed responsibility for providing the LSST camera. Although the Camera project manages its own schedule and budget, including contingency, the Camera team’s schedule and requirements are integrated with the larger Project.  The camera effort is accountable to the LSSTPO.}}
 \newacronym{SP} {SP} {Survey Performance}
@@ -108,6 +116,7 @@
 \newglossaryentry{Summit} {name={Summit}, description={The site on the Cerro Pach\'{o}n, Chile mountaintop where the LSST observatory, support facilities, and infrastructure will be built}}
 \newglossaryentry{Systems Engineering} {name={Systems Engineering}, description={an interdisciplinary field of engineering that focuses on how to design and manage complex engineering systems over their life cycles. Issues such as requirements engineering, reliability, logistics, coordination of different teams, testing and evaluation, maintainability and many other disciplines necessary for successful system development, design, implementation, and ultimate decommission become more difficult when dealing with large or complex projects. Systems engineering deals with work-processes, optimization methods, and risk management tools in such projects. It overlaps technical and human-centered disciplines such as industrial engineering, control engineering, software engineering, organizational studies, and project management. Systems engineering ensures that all likely aspects of a project or system are considered, and integrated into a whole}}
 \newacronym{TLS} {TLS} {Transport Layer Security}
+\newglossaryentry{Telescope and Site} {name={Telescope and Site}, description={The LSST subsystem responsible for design and construction of the telescope structure, telescope mirrors, optical wavefront measurement and control system, telescope and observatory control systems software, and the summit and base facilities. The Telescope technical team is hosted by NOAO}}
 \newacronym{UK} {UK} {United Kingdom}
 \newacronym{UKDF} {UKDF} {United Kingdom Data Facility}
 \newacronym{US} {US} {United States}
@@ -125,5 +134,7 @@
 \newglossaryentry{middleware} {name={middleware}, description={Software that acts as a bridge between other systems or software usually a database or network. Specifically in the Data Management System this refers to Butler for data access and Workflow management for distributed processing.}}
 \newglossaryentry{monitoring} {name={monitoring}, description={In DM QA, this refers to the process of collecting, storing, aggregating and visualizing metrics}}
 \newglossaryentry{nublado} {name={nublado}, description={The service underpinning the Notebook Aspect of the Rubin Science Platform}}
+\newglossaryentry{script queue} {name={script queue}, description={A CSC which manages SAL scripts, running one script at a time until the queue is exhausted or paused}}
 \newglossaryentry{shape} {name={shape}, description={In reference to a Source or Object, the shape is a functional characterization of its spatial intensity distribution, and the integral of the shape is the flux. Shape characterizations are a data product in the DIASource, DIAObject, Source, and Object catalogs}}
+\newglossaryentry{test stand} {name={test stand}, description={An environment used for testing the operation of the LSST Camera, or some component thereof. In the Data Management context, this generally refers to a simulated Camera readout system used to test the interface between the Camera and the DM system (see, for example, NTS)}}
 \newglossaryentry{transient} {name={transient}, description={A transient source is one that has been detected on a difference image, but has not been associated with either an astronomical object or a solar system body}}
