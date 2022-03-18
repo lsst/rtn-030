@@ -7,14 +7,18 @@
 \newglossaryentry{Archive} {name={Archive}, description={The repository for documents required by the NSF to be kept. These include documents related to design and development, construction, integration, test, and operations of the LSST observatory system. The archive is maintained using the enterprise content management system DocuShare, which is accessible through a link on the project website www.project.lsst.org}}
 \newglossaryentry{Archive Center} {name={Archive Center}, description={Part of the LSST Data Management System, the LSST archive center is a data center at NCSA that hosts the LSST Archive, which includes released science data and metadata, observatory and engineering data, and supporting software such as the LSST Software Stack}}
 \newglossaryentry{Association of Universities for Research in Astronomy} {name={Association of Universities for Research in Astronomy}, description={ consortium of US institutions and international affiliates that operates world-class astronomical observatories, AURA is the legal entity responsible for managing what it calls independent operating Centers, including LSST, under respective cooperative agreements with the National Science Foundation. AURA assumes fiducial responsibility for the funds provided through those cooperative agreements. AURA also is the legal owner of the AURA Observatory properties in Chile}}
+\newacronym{BTS} {BTS} {Base (La Serena) Test Stand}
 \newglossaryentry{Broker} {name={Broker}, description={Software which receives and redistributes Alerts, and may also perform processing such as filtering for certain characteristics, cross-matching with non-LSST catalogs, and/or light-curve classification, in order to identify and prioritize targets for follow-up and/or make scientific analyses. }}
 \newglossaryentry{Butler} {name={Butler}, description={A middleware component for persisting and retrieving image datasets (raw or processed), calibration reference data, and catalogs}}
+\newacronym{CCD} {CCD} {\gls{Charge-Coupled Device}}
 \newacronym{COS} {COS} {Center \gls{Operations} Services}
 \newacronym{CS} {CS} {citizen science}
 \newacronym{CSC} {CSC} {Commandable \gls{SAL} Component}
 \newacronym{CUI} {CUI} {Controlled Unclassified Information}
 \newglossaryentry{Camera} {name={Camera}, description={The LSST subsystem responsible for the 3.2-gigapixel LSST camera, which will take more than 800 panoramic images of the sky every night. SLAC leads a consortium of Department of Energy laboratories to design and build the camera sensors, optics, electronics, cryostat, filters and filter exchange mechanism, and camera control system}}
 \newglossaryentry{Center} {name={Center}, description={An entity managed by AURA that is responsible for execution of a federally funded project}}
+\newglossaryentry{Charge-Coupled Device} {name={Charge-Coupled Device}, description={a particular kind of solid-state sensor for detecting optical-band photons. It is composed of a 2-D array of pixels, and one or more read-out amplifiers}}
+\newacronym{ComCam} {ComCam} {The commissioning \gls{camera} is a single-raft, 9-CCD \gls{camera} that will be installed in LSST during commissioning, before the final \gls{camera} is ready.}
 \newglossaryentry{Commissioning} {name={Commissioning}, description={A two-year phase at the end of the Construction project during which a technical team a) integrates the various technical components of the three subsystems; b) shows their compliance with ICDs and system-level requirements as detailed in the LSST Observatory System Specifications document (OSS, LSE-30); and c) performs science verification to show compliance with the survey performance specifications as detailed in the LSST Science Requirements Document (SRD, LPM-17)}}
 \newglossaryentry{Compliance} {name={Compliance}, description={Adherence to the laws, regulations, award terms and conditions, specifications, and internal policies applicable to the LSST Project}}
 \newglossaryentry{Construction} {name={Construction}, description={The period during which LSST observatory facilities, components, hardware, and software are built, tested, integrated, and commissioned. Construction follows design and development and precedes operations. The LSST construction phase is funded through the NSF MREFC account}}
@@ -45,6 +49,7 @@
 \newglossaryentry{Director} {name={Director}, description={The person responsible for the overall conduct of the project; the LSST director is charged with ensuring that both the scientific goals and management constraints on the project are met. S/he is the principal public spokesperson for the project in all matters and represents the project to the scientific community, AURA, the member institutions of LSSTC, and the funding agencies}}
 \newglossaryentry{DocuShare} {name={DocuShare}, description={The trade name for the enterprise management software used by LSST to archive and manage documents}}
 \newglossaryentry{Document} {name={Document}, description={Any object (in any application supported by DocuShare or design archives such as PDMWorks or GIT) that supports project management or records milestones and deliverables of the LSST Project}}
+\newacronym{Duo} {Duo} {2 factor authentication system}
 \newacronym{EPO} {EPO} {\gls{Education and Public Outreach}}
 \newglossaryentry{Education and Public Outreach} {name={Education and Public Outreach}, description={The LSST subsystem responsible for the cyberinfrastructure, user interfaces, and outreach programs necessary to connect educators, planetaria, citizen scientists, amateur astronomers, and the general public to the transformative LSST dataset}}
 \newglossaryentry{Enclave} {name={Enclave}, description={Individually defined portions of the computational resources at the Summit, Base, NCSA, and Satellite Facilities, such as the Prompt Enclave, the Archive Enclave, etc. }}
@@ -58,8 +63,10 @@
 \newacronym{IAU} {IAU} {International Astronomical Union}
 \newacronym{IDAC} {IDAC} {\gls{Independent Data Access Center}}
 \newacronym{IN2P3} {IN2P3} {Institut National de Physique Nucléaire et de Physique des Particules}
+\newacronym{IPA} {IPA} {FreeIPA is an integrated security information management solution}
 \newacronym{IRIS} {IRIS} {e-Infrastructure for Research and Innovation for \gls{STFC}}
 \newacronym{IT} {IT} {Information Technology}
+\newacronym{IaC} {IaC} {Infrastructure as Code}
 \newglossaryentry{Independent Data Access Center} {name={Independent Data Access Center}, description={Externally supported and administered versions of the DAC to serve the full, or a limited subset of, the LSST data products and/or software to authorized users. }}
 \newacronym{LDM} {LDM} {LSST Data Management (Document \gls{Handle})}
 \newacronym{LDO} {LDO} {LSST Document \gls{Operations} (Document Handle)}
@@ -118,6 +125,7 @@
 \newglossaryentry{Systems Engineering} {name={Systems Engineering}, description={an interdisciplinary field of engineering that focuses on how to design and manage complex engineering systems over their life cycles. Issues such as requirements engineering, reliability, logistics, coordination of different teams, testing and evaluation, maintainability and many other disciplines necessary for successful system development, design, implementation, and ultimate decommission become more difficult when dealing with large or complex projects. Systems engineering deals with work-processes, optimization methods, and risk management tools in such projects. It overlaps technical and human-centered disciplines such as industrial engineering, control engineering, software engineering, organizational studies, and project management. Systems engineering ensures that all likely aspects of a project or system are considered, and integrated into a whole}}
 \newacronym{TLS} {TLS} {Transport Layer Security}
 \newacronym{TMA} {TMA} {Telescope Mount Assembly}
+\newacronym{TTS} {TTS} {Tucson Test Stand}
 \newglossaryentry{Telescope and Site} {name={Telescope and Site}, description={The LSST subsystem responsible for design and construction of the telescope structure, telescope mirrors, optical wavefront measurement and control system, telescope and observatory control systems software, and the summit and base facilities. The Telescope technical team is hosted by NOAO}}
 \newacronym{UK} {UK} {United Kingdom}
 \newacronym{UKDF} {UKDF} {United Kingdom Data Facility}
