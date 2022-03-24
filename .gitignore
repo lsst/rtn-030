@@ -182,3 +182,6 @@ TSWLatexianTemp*
 
 # KBibTeX
 *~[0-9]*
+actions.tex
+token.pickle
+client_secret.json

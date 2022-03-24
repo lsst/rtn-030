@@ -1,0 +1,84 @@
+\section{Telescope and Site  System architecture} \label{sec:tsarc}
+
+ We concern our selves here mainly with the software architecture of telescope and site,
+this includes the control system but also the controlled devices and various test stands.
+
+The control system architecture is given in \citeds{LSE-150}.
+Broadly this is a message bus architecture with  various controllable components such as the Camera, Environmental Control, etc. attached to it.
+The components can receive control messages and telemetry from the bus by listening to various queues.
+The script queue component allows for orchestrated commanding of various components.
+
+This set may be seen for the Main Telescope as well as the Auxiliary Telescope.
+In addition there is a test stand in the Base and one in Tucson which have physical DAQ hardware to emulate the camera and can simulate many other physical components for testing the control system.
+
+We consider these systems under the same headings used in \secref{sec:dparc}.
+
+
+
+
+
+\subsection{Summit Systems}
+The summit iOS the crown jewel of Rubin the network and control system touch all the hardware on the summit.
+The control system, which touches all hardware, is described in \citeds{LSE-150}.
+This is a message bus system allowing command of all commandable devices from the \gls{TMA} to the \gls{HVAC}.
+Most of the computing hardware lives in the summit computer room on the second floor  which is card accessible and has cameras in place.
+Racks in the computing room are locked with individual codes known to Rubin IT.
+Combinations are kept in a password vault.
+Access to services on the summit is more restricted than to the rest of Rubin, see the on boarding procedure \citeds{ittn-045}.
+
+Access to most controls is through the control room which is a key card accessible room on the second floor of the observatory
+
+
+
+Underlying some of this is the virtualization system as described \citeds{ittn-036}.
+
+
+\subsubsection{Threats and Security infrastructure}
+
+The summit has several security features coming from the Chilean infrastructure:
+\begin{itemize}
+\item The summit has firewalls and 2FA enabled VPN access.
+\item Accessibility to the summit is via the access road which has a physical security check.
+\item The Control and Computer rooms as well as the Dome can only be accessed by authorized personnel with key cards.
+\end{itemize}
+
+There are also many threats:
+
+\begin{itemize}
+\item \citeds{DMTN-108} discusses some issues such as fiber taps to access data.
+\item Assuming access was gained to the computer room physical disks could be removed, our infrastructure as code approach allows us to quickly rebuild servers, the data is also available at SLAC. Disks on the summit are encrypted meaning it would be quite difficult for anyone to retrieve data from any physical disks removed from the computer room.
+\item As always our network may be vulnerable to attack, we follow NIST advice and will have a contract with a cyber security firm to assist in this area.
+\end{itemize}
+
+\subsubsection{Disaster recovery}
+
+\begin{itemize}
+\item We can deploy most systems from scratch using the Rancher, puppet, kubernetes \gls{IaC}  approach. This is relatively quick (hours) provided machines are available. This also means machines are interchangeable and we keep at least one spare on the summit.
+\item Other systems such as the coating chamber control computer have spares since we can not rebuild them easily.
+\item Should we have an all out attack on the system via the \gls{LHN} we have an out of bounds link which still provides access and monitoring (allowing shutdown if needed).
+\item Though the software \emph{could} command systems out of limits all the physical devices have engineering safety stops build in.
+\end{itemize}
+
+\subsection{Base Test Stand} \label{sec:bts}
+In the computer room on the base facility in Las Serena we have the \gls{BTS}.
+This is a full \gls{DAQ} identical to that attached to the camera on the summit, as well as as set of supporting machines which allow deployment of both control components and simulators.
+This allow full scale testing of the summit control systems and especially the Camera readout.
+\subsubsection{Threats and Security infrastructure}
+This system is behind the La Serena firewall. It is accessible by VPN.
+Access is restricted to the computer room and cameras are in place.
+
+\subsubsection{Disaster recovery}
+Apart from the DAQ itself the machines here are standard and the system can be rebuilt using our \gls{IaC} approach.
+There is no irreplaceable data on the system.
+
+\subsection{Tucson Test Stand} \label{sec:tts}
+The \gls{TTS} is located in the commuter room on Cherry Ave in Tucson.
+It is similar to the \gls{BTS} \secref{sec:bts} but has a smaller DAQ more ComCam sized.
+This is still very useful for testing.
+\subsubsection{Threats and Security infrastructure}
+This system is behind the Tucson firewall. It is accessible by VPN.
+Access is restricted to the computer room with only a few AURA employees allowed to access it.
+
+\subsubsection{Disaster recovery}
+Apart from the DAQ itself the machines here are standard and the system can be rebuilt using our \gls{IaC} approach.
+
