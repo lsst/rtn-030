@@ -1,4 +1,4 @@
-\documentclass[DM,authoryear,toc]{lsstdoc}
+\documentclass[OPS,lsstdraft,authoryear,toc]{lsstdoc}
 % lsstdoc documentation: https://lsst-texmf.lsst.io/lsstdoc.html
 \input{meta}
 
@@ -7,16 +7,16 @@
 % Local commands go here.
 
 %If you want glossaries
-%\input{aglossary.tex}
-%\makeglossaries
+\input{aglossary.tex}
+\makeglossaries
 
-\title{Rubin Data Production Security Plan}
+\title{Rubin Data and Information Security Plan}
 
 % Optional subtitle
 % \setDocSubtitle{A subtitle}
 
 \author{%
-William O'Mullane
+William O'Mullane and Russ Allbery and Richard Dubois and KT. Lim
 }
 
 \setDocRef{RTN-030}
@@ -28,7 +28,8 @@ William O'Mullane
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-This document will replace LDM-324 for the operations era. It covers data security and recovery, threats and mechanisms for dealing with them. Where possible it will refer to other documents for details.
+This document covers data security and recovery, threats and mechanisms for dealing with them. Where possible it will refer to other documents for details.
+This replaces LDM-324 for the operations era.
 }
 
 % Change history defined here.
@@ -36,7 +37,7 @@ This document will replace LDM-324 for the operations era. It covers data securi
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
-  \addtohist{1}{YYYY-MM-DD}{Unreleased.}{William O'Mullane}
+  \addtohist{0.1}{2022-09-09}{draft}{William O'Mullane}
 }
 
 
@@ -47,9 +48,7 @@ This document will replace LDM-324 for the operations era. It covers data securi
 % Frequently for a technote we do not want a title page  uncomment this to remove the title page and changelog.
 % use \mkshorttitle to remove the extra pages
 
-% ADD CONTENT HERE
-% You can also use the \input command to include several content files.
-
+\input{body}
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
@@ -57,11 +56,19 @@ This document will replace LDM-324 for the operations era. It covers data securi
 \renewcommand{\refname}{} % Suppress default Bibliography section
 \bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
 
+%NIST compliance from google sheet
+\section{Compliance with NIST800-171} \label{ap:compliance}
+\input{compliance}
+
 % Make sure lsst-texmf/bin/generateAcronyms.py is in your path
-\section{Acronyms} \label{sec:acronyms}
-\input{acronyms.tex}
+%\section{Acronyms} \label{sec:acronyms}
+%\input{acronyms.tex}
 % If you want glossary uncomment below -- comment out the two lines above
-%\printglossaries
+\printglossaries
+
+\section{Actions (temporary) }
+This section should disappear when these are all done.
+\listofactions
 
 
 
