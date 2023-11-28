@@ -1,7 +1,7 @@
 %ENclave text from KT  https://docs.google.com/document/d/1apNSWtIpbS7aCitaF_K0JXLAAY9PvCEmmvnNvHmecdk/edit#heading=h.nwgy0freb3zv
 
 
-\section{Data Production system architecture} \label{sec:dparc}
+\section{Data Management system architecture} \label{sec:dparc}
 The overall system architecture is available in \citeds{LDM-148}.
 Details on the \gls{USDF} specifications are given in \citeds{DMTN-189}.
 \action{GS,FH}{March 2022}{Should we have Specs like \gls{DMTN}-189 for UK and FRdF ?}
@@ -120,8 +120,7 @@ We will not start work on this until near the start of operations.
 \item All access will be via \gls{RSP} pods and hence containerized - escalation potential from in side the container will be carefully monitored.
 \end{itemize}
 \subsubsection{Disaster recovery}
-
-The Chile disaster recovery plan will cover the Chile \gls{DAC}.  \action{CS}{May}{Chile disaster recovery docs}
+The Chile disaster recovery plan will cover the Chile \gls{DAC} \citeds{ittn-055}.
 
 \subsection{Development and Integration  \gls{Enclave}}
 Rubin Observatory and \gls{USDF} staff will use this enclave to build and test new versions of software and services to be deployed in the other enclaves.
