@@ -39,7 +39,7 @@ The obvious threat surfaces here are :
 \begin{enumerate}
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
 \item Transmission to \gls{LLNL}.  This will be over internet using TLS.
-\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{RD}{March 2022}{ Need ref to SLAC security polices for users .. i.e. FACTS and all that .. }
+\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{RD}{March 2022}{ Need ref to SLAC security polices for users i.e. FACTS and all that. }
 \item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC \gls{VPN} and 2FA. These tools are also only accessible by staff and probably pose a low risk.
 \item The for the initial 10 days (30 in commissioning) after acquisition the data is maintain on encrypted disks with in the restricted \gls{OGA} rack.
 \end{enumerate}
@@ -47,7 +47,7 @@ The obvious threat surfaces here are :
 \subsubsection{Disaster recovery}
 All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
 In the case of a total wipe out of the \gls{OGA} systems use of Chef, docker etc allow redeployment rapidly.
-See also the \gls{SLAC} Rubin disaster recovery plan. \action{RD}{March 22}{Need a \gls{SLAC} disaster recover plan}.
+See also the \gls{SLAC} Rubin disaster recovery plan. \action{RD}{March 23}{Need a \gls{SLAC} disaster recover plan}.
 The back up for the embargoed data is the Chile OGA rack.
 
 \subsection{ Offline Production  \gls{Enclave}}
@@ -131,7 +131,7 @@ Rubin Observatory and \gls{USDF} staff will use this enclave to build and test n
 \begin{itemize}
 \item Developers have a higher level of access than most users.
 This is a necessary and accepted risk.
-\item All developers must adhere to  SLAC access rules e..g FACTS checking etc.
+\item All developers must adhere to  SLAC access rules e.g. FACTS checking etc.
 \end{itemize}
 
 \subsubsection{Disaster recovery}
@@ -142,7 +142,7 @@ All code is deployed using Chef or containers and hence fairly easily recoverabl
 
 
 \subsection{FrDF Processing  \gls{Enclave}}
-50\% of \gls{DRP} will be done at IN2P3.
+40\% of \gls{DRP} will be done at IN2P3.
 A full back up of the raw data will also be held there.
 The IN2P3 computing infrastructure is described in \url{https://doc.lsst.eu/}.
 \subsubsection{Threats and Security infrastructure}
