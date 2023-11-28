@@ -65,6 +65,7 @@
 \newacronym{IN2P3} {IN2P3} {Institut National de Physique Nucléaire et de Physique des Particules}
 \newacronym{IPA} {IPA} {FreeIPA is an integrated security information management solution}
 \newacronym{IRIS} {IRIS} {e-Infrastructure for Research and Innovation for \gls{STFC}}
+\newacronym{ISO} {ISO} {Informaiton Security Officer}
 \newacronym{IT} {IT} {Information Technology}
 \newacronym{IaC} {IaC} {Infrastructure as Code}
 \newglossaryentry{Independent Data Access Center} {name={Independent Data Access Center}, description={Externally supported and administered versions of the DAC to serve the full, or a limited subset of, the LSST data products and/or software to authorized users. }}
@@ -96,8 +97,10 @@
 \newacronym{OSS} {OSS} {Observatory System Specifications; \gls{LSE}-30}
 \newglossaryentry{Object} {name={Object}, description={In LSST nomenclature this refers to an astronomical object, such as a star, galaxy, or other physical entity. E.g., comets, asteroids are also Objects but typically called a Moving Object or a Solar System Object (SSObject). One of the DRP data products is a table of Objects detected by LSST which can be static, or change brightness or position with time}}
 \newglossaryentry{Operations} {name={Operations}, description={The 10-year period following construction and commissioning during which the LSST Observatory conducts its survey}}
+\newacronym{PMO} {PMO} {\gls{Project Management Office}}
 \newacronym{PSF} {PSF} {Point Spread Function}
 \newglossaryentry{Primavera} {name={Primavera}, description={The trade name for the project management software suite used by LSST to maintain its program plan and schedule}}
+\newglossaryentry{Project Management Office} {name={Project Management Office}, description={the work element responsible for achieving the project's objectives}}
 \newglossaryentry{Project Manager} {name={Project Manager}, description={The person responsible for exercising leadership and oversight over the entire Rubin project; he or she controls schedule, budget, and all contingency funds}}
 \newglossaryentry{Prompt Processing} {name={Prompt Processing}, description={The data processing which occurs at the Archive Center based on the stream of images coming from the telescope. This includes both Alert Production, which scans the image stream to identify and send alerts on transient and variable sources, and Solar System Processing, which identifies and characterizes objects in our solar system. It also includes specialized rapid calibration and Commissioning processing. Prompt Processing generates the Prompt Data Products.}}
 \newacronym{QA} {QA} {\gls{Quality Assurance}}
@@ -141,6 +144,8 @@
 \newacronym{VLAN} {VLAN} { Virtual Local Area Network}
 \newacronym{VPN} {VPN} {virtual private network}
 \newacronym{VRO} {VRO} {(not to be used)Vera C. Rubin Observatory}
+\newacronym{WBS} {WBS} {\gls{Work Breakdown Structure}}
+\newglossaryentry{Work Breakdown Structure} {name={Work Breakdown Structure}, description={a tool that defines and organizes the LSST project's total work scope through the enumeration and grouping of the project's discrete work elements}}
 \newglossaryentry{airmass} {name={airmass}, description={The pathlength of light from an astrophysical source through the Earth's atmosphere. It is given approximately by sec z, where z is the angular distance from the zenith (the point directly overhead, where airmass = 1.0) to the source}}
 \newglossaryentry{astronomical object} {name={astronomical object}, description={A star, galaxy, asteroid, or other physical object of astronomical interest. Beware: in non-LSST usage, these are often known as sources}}
 \newglossaryentry{background} {name={background}, description={In an image, the background consists of contributions from the sky (e.g., clouds or scattered moonlight), and from the telescope and camera optics, which must be distinguished from the astrophysical background. The sky and instrumental backgrounds are characterized and removed by the LSST processing software using a low-order spatial function whose coefficients are recorded in the image metadata}}
@@ -148,6 +153,7 @@
 \newglossaryentry{camera} {name={camera}, description={An imaging device mounted at a telescope focal plane, composed of optics, a shutter, a set of filters, and one or more sensors arranged in a focal plane array}}
 \newglossaryentry{cloud} {name={cloud}, description={A visible mass of condensed water vapor floating in the atmosphere, typically high above the ground or in interstellar space acting as the birthplace for stars.  Also a way of computing (on other peoples computers leveraging their services and availability).}}
 \newglossaryentry{configuration} {name={configuration}, description={A task-specific set of configuration parameters, also called a 'config'. The config is read-only; once a task is constructed, the same configuration will be used to process all data. This makes the data processing more predictable: it does not depend on the order in which items of data are processed. This is distinct from arguments or options, which are allowed to vary from one task invocation to the next}}
+\newglossaryentry{element} {name={element}, description={A node in the hierarchical project WBS}}
 \newglossaryentry{flux} {name={flux}, description={Shorthand for radiative flux, it is a measure of the transport of radiant energy per unit area per unit time. In astronomy this is usually expressed in cgs units: erg/cm2/s}}
 \newglossaryentry{metadata} {name={metadata}, description={General term for data about data, e.g., attributes of astronomical objects (e.g. images, sources, astroObjects, etc.) that are characteristics of the objects themselves, and facilitate the organization, preservation, and query of data sets. (E.g., a FITS header contains metadata)}}
 \newglossaryentry{middleware} {name={middleware}, description={Software that acts as a bridge between other systems or software usually a database or network. Specifically in the Data Management System this refers to Butler for data access and Workflow management for distributed processing.}}
