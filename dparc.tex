@@ -38,7 +38,7 @@ The obvious threat surfaces here are :
 \begin{enumerate}
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
 \item Transmission to \gls{LLNL}.  This will be over internet using TLS.
-\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{RD}{March 2022}{ Need ref to SLAC security polices for users i.e. FACTS and all that. }
+\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{JC}{June 2024}{ Need ref to SLAC security polices for users i.e. FACTS and all that. }
 \item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC \gls{VPN} and 2FA. These tools are also only accessible by staff and probably pose a low risk.
 \item The for the initial 10 days (30 in commissioning) after acquisition the data is maintain on encrypted disks with in the restricted \gls{OGA} rack.
 \end{enumerate}
@@ -46,7 +46,7 @@ The obvious threat surfaces here are :
 \subsubsection{Disaster recovery}
 All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
 In the case of a total wipe out of the \gls{OGA} systems use of Chef, docker etc allow redeployment rapidly.
-See also the \gls{SLAC} Rubin disaster recovery plan. \action{RD}{March 23}{Need a \gls{SLAC} disaster recover plan}.
+See also the \gls{SLAC} Rubin disaster recovery plan \citeds{RTN-078}.
 The back up for the embargoed data is the Chile OGA rack.
 
 \subsection{ Offline Production  \gls{Enclave}}
@@ -101,7 +101,7 @@ Hosting it on a cloud provider reduces risk considerably for the Archive enclave
 
 Backend archive services could provide another attack surface.
 These are governed by \gls{SLAC} security.
-\action{RD}{March 22}{Reference for security of archive services }
+\action{JC}{June 2024}{Reference for security of archive services }
 
 \subsubsection{Disaster recovery}
 For user  spaces we rely on cloud provider redundancy/backup/recovery.
