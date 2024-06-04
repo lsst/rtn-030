@@ -9,7 +9,7 @@
 {3.1.5 Employ the principle of least privilege, including for specific security functions and privileged accounts.}&{N}&{Y}&{Targeted sudo rules are needed for common operations. IPA controls sudo centrally } \\ \hline
 {3.1.6 Use non-privileged accounts or roles when accessing nonsecurity functions.}&{Y}&{Y}& \\ \hline
 {3.1.7 Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.}&{}&{Y}&{This is probably sudo attempts audits. Full commands can be logged in at the cost of extra load for the servers.} \\ \hline
-{3.1.8 Limit unsuccessful login attempts.}&{N}&{Y}&{Web Services such as love, foreman, ipa console, nublado, etc. may need rate limiting. We don't use passwords in ssh hosts, only ssh keys (which many consider more secure).  We are not aware of a retry limit for ssh-key access; an appropriate extra level of security would be to not use the default port 22. However, we do limit attempts to 6 with a block of 600 minutes, which will effectively block failed SUDO logins.} \\ \hline
+{3.1.8 Limit unsuccessful login attempts.}&{Y}&{Y}&{Web Services such as love, foreman, ipa console, nublado, etc. may need rate limiting. We don't use passwords in ssh hosts, only ssh keys (which many consider more secure).  We are not aware of a retry limit for ssh-key access; an appropriate extra level of security would be to not use the default port 22. However, we do limit attempts to 6 with a block of 600 minutes, which will effectively block failed SUDO logins.} \\ \hline
 {3.1.9 Provide privacy and security notices consistent with applicable CUI rules.}&{N}&{Y}&{Check login notices etc. A login banner can be displayed upon login } \\ \hline
 {3.1.10 Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity.}&{Y}&{Y}&{This is our policy.} \\ \hline
 {3.1.11 Terminate (automatically) a user session after a defined condition.}&{Y}&{Y}&{ssh sessions are generally not limited on hosts but VPN will timeout daily; some network equipment has timeouts set;} \\ \hline
@@ -75,7 +75,7 @@
 {3.8.1 Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital.}&{Y}&{Y}&{Pixel Zone and Embago Rack} \\ \hline
 {3.8.2 Limit access to CUI on system media to authorized users.}&{Y}&{Y}&{Pixel Zone and Embago Rack} \\ \hline
 {3.8.3 Sanitize or destroy system media containing CUI before disposal or release for reuse.}&{Y}&{Y}& \\ \hline
-{3.8.4 Mark media with necessary CUI markings and distribution limitations.}&{N}&{Y}&{We understand we should label rooms and machines acording to https://www.archives.gov/files/cui/20161206-cui-marking-handbook-v1-1.pdf} \\ \hline
+{3.8.4 Mark media with necessary CUI markings and distribution limitations.}&{N}&{Y}&{We decline to label rooms and machines acording to https://www.archives.gov/files/cui/20161206-cui-marking-handbook-v1-1.pdf} \\ \hline
 {3.8.5 Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas.}&{Y}&{Y}& \\ \hline
 {3.8.6 Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards.}&{Y}&{Y}& \\ \hline
 {3.8.7 Control the use of removable media on system components.}&{N}&{Y}&{Can be rolled out with puppet but there are some servers that need usb. } \\ \hline
@@ -125,5 +125,5 @@
 {3.14.6 Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks.}&{Y}&{Y}& \\ \hline
 \textbf{Total requirements}&\textbf{}&\textbf{108}& \\ \hline
 \textbf{Total Rubin Intends to comply with }&\textbf{}&\textbf{107}& \\ \hline
-\textbf{Total Rubin Complies with in 2024}&\textbf{}&\textbf{94}& \\ \hline
+\textbf{Total Rubin Complies with in 2024}&\textbf{}&\textbf{95}& \\ \hline
 \end{longtable} \normalsize
