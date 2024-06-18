@@ -56,7 +56,7 @@ Each year (or more frequently), the Offline Production enclave takes the raw ima
 \subsubsection{ Threats and Security infrastructure}
 \begin{itemize}
 \item Offline production data is no longer embargoed ergo not considered under threat.
-\item Data could be intercepted in transfer between sites, however this is only performed after the embargo period hence the security risk is low.
+\item Although data exchange among the facilities uses encryption (secure HTTP over TLS), if data were to be intercepted in transfer between sites, this could only occur after the embargo period hence the security risk is low.
 \item Malicious users could disrupt data or processing.
 We are using standard tooling from \gls{HEP} which has been in use for many years and gives a level confidence of their suitability in this scientific endeavor.
 Still internal users remain a major risk - we maintain an inclusive project and try to avoid disgruntled team members.
@@ -68,7 +68,7 @@ Post embargo FrDF keeps a full copy of the raw data.
 The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
 As the permanent scientific record of the survey, no more than 1\% of the raw images or telemetry may be lost or corrupted according to Rubin requirements.
 
-To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
+To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and selected data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
 
 We intend to have a hybrid access model for the archive where  the \gls{RSP} users and user processing will be on Google cloud while the data resides at SLAC. A cache of images will be held on Google with a dedicated client pulling needed images from SLAC to google.
 
@@ -77,7 +77,7 @@ We intend to have a hybrid access model for the archive where  the \gls{RSP} use
 
 \begin{itemize}
 \item Archive data is no longer embargoed ergo not considered under threat.
-\item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC i for processing and archive and the more public facing \gls{RSP}.
+\item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC for processing and archive and the more public facing \gls{RSP}.
 \end{itemize}
 \subsubsection{Disaster recovery}
 Post embargo FrDF keeps a full copy of the raw data.
@@ -168,4 +168,4 @@ If unauthorized access occurs the impact is low in terms of system integrity - i
 
 \subsubsection{Disaster recovery}
 We are not concerned with disasters at IDACs.
-We can resend the appropriate data to them
+We can resend the appropriate data to them.
