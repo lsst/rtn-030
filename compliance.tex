@@ -1,89 +1,524 @@
 \tiny \begin{longtable} {|p{0.5\textwidth}|p{0.05\textwidth}|p{0.05\textwidth}|p{0.4\textwidth} |} \caption{This table provides an overview of the \citeds{NIST.SP.800-171} and Rubin compliance with it. \label{tab:compliance}}\\ 
 \hline 
-\textbf{NIST 800-171}&\textbf{2024 Status}&\textbf{Intended Compliance}&\textbf{Note} \\ \hline
+\textbf{NIST 800-171r3}&\textbf{2024 Status}&\textbf{Intended Compliance}&\textbf{Note} \\ \hline
 {3.1 ACCESS CONTROL}&&& \\ \hline
-{3.1.1 Limit system access to authorized users, processes acting on behalf of authorized users, and devices (including other systems).}&{Y}&{Y}& \\ \hline
-{3.1.2 Limit system access to the types of transactions and functions that authorized users are permitted to execute.}&{Y}&{Y}&{IPA groups are in place on the summit restriiiicting users abilities. Legacy systems use the active directory groups for this.} \\ \hline
-{3.1.3 Control the flow of CUI in accordance with approved authorizations.}&{Y}&{Y}& \\ \hline
-{3.1.4 Separate the duties of individuals to reduce the risk of malevolent activity without collusion.}&{Y}&{Y}&{Principle of least privilege is applied. Many users have access to hosts that is unneeded.} \\ \hline
-{3.1.5 Employ the principle of least privilege, including for specific security functions and privileged accounts.}&{N}&{Y}&{Targeted sudo rules are needed for common operations. IPA controls sudo centrally } \\ \hline
-{3.1.6 Use non-privileged accounts or roles when accessing nonsecurity functions.}&{Y}&{Y}& \\ \hline
-{3.1.7 Prevent non-privileged users from executing privileged functions and capture the execution of such functions in audit logs.}&{}&{Y}&{This is probably sudo attempts audits. Full commands can be logged in at the cost of extra load for the servers.} \\ \hline
-{3.1.8 Limit unsuccessful login attempts.}&{Y}&{Y}&{Web Services such as love, foreman, ipa console, nublado, etc. may need rate limiting. We don't use passwords in ssh hosts, only ssh keys (which many consider more secure).  We are not aware of a retry limit for ssh-key access; an appropriate extra level of security would be to not use the default port 22. However, we do limit attempts to 6 with a block of 600 minutes, which will effectively block failed SUDO logins.} \\ \hline
-{3.1.9 Provide privacy and security notices consistent with applicable CUI rules.}&{N}&{Y}&{Check login notices etc. A login banner can be displayed upon login } \\ \hline
-{3.1.10 Use session lock with pattern-hiding displays to prevent access and viewing of data after a period of inactivity.}&{Y}&{Y}&{This is our policy.} \\ \hline
-{3.1.11 Terminate (automatically) a user session after a defined condition.}&{Y}&{Y}&{ssh sessions are generally not limited on hosts but VPN will timeout daily; some network equipment has timeouts set;} \\ \hline
-{3.1.12 Monitor and control remote access sessions.}&{N}&{Y}&{We currently check who and from where is connecting.} \\ \hline
-{3.1.13 Employ cryptographic mechanisms to protect the confidentiality of remote access sessions.}&{Y}&{Y}&{VPN is in use} \\ \hline
-{3.1.14 Route remote access via managed access control points.}&{Y}&{Y}&{Bastion nodes -- IPSec routers now inplace also.} \\ \hline
-{3.1.15 Authorize remote execution of privileged commands and remote access to security-relevant information.}&{Y}&{Y}& \\ \hline
-{3.1.16 Authorize wireless access prior to allowing such connections.}&{Y}&{Y}&{All devics attaching in Chile need to be registered by Mac address.} \\ \hline
-{3.1.17 Protect wireless access using authentication and encryption.}&{Y}&{Y}& \\ \hline
-{3.1.18 Control connection of mobile devices.}&{Y}&{Y}&{In the sense there is no open wifi, and on the summit devices must be registered. } \\ \hline
-{3.1.19 Encrypt CUI on mobile devices and mobile computing platforms.23}&{Y}&{Y}&{Data will not exist on mobile devices - in the case where an image may exist on say commissioning team laptop we will have disk encryption enabled. } \\ \hline
-{3.1.20 Verify and control/limit connections to and use of external systems.}&{Y}&{Y}&{This implies vetting of devices that connect to the control network - we use mac address for laptops and personal mobile phones can not connect to the control network. We also have a separation with the \gls{LHN} \gls{SSID} and \gls{VLAN}s.} \\ \hline
-{3.1.21 Limit use of portable storage devices on external systems.}&{N}&{Y}&{Can be rolled out with puppet but there are some servers that need usb. } \\ \hline
-{3.1.22 Control CUI posted or processed on publicly accessible systems.}&{Y}&{Y}&{We do not intend to post images on publicly accessible systems. (DMTN-286)} \\ \hline
+{03.01.01 Account Management
+
+a. Define the types of system accounts allowed and prohibited.
+
+b. Create, enable, modify, disable, and remove system accounts in accordance with policy, procedures, prerequisites, and criteria.
+
+c. Specify: 
+
+1. Authorized users of the system,
+
+2. Group and role membership, and
+
+3. Access authorizations (i.e., privileges) for each account.
+
+d. Authorize access to the system based on:
+
+1. A valid access authorization and 
+
+2. Intended system usage.
+
+e. Monitor the use of system accounts.
+
+f. Disable system accounts when:
+
+1. The accounts have expired, 
+
+2. The accounts have been inactive for [Assignment: organization-defined time period],
+
+3. The accounts are no longer associated with a user or individual,
+
+4. The accounts are in violation of organizational policy, or
+
+5. Significant risks associated with individuals are discovered. 
+
+g. Notify account managers and designated personnel or roles within:
+
+1. [Assignment: organization-defined time period] when accounts are no longer required.
+
+2. [Assignment: organization-defined time period] when users are terminated or transferred.
+
+3. [Assignment: organization-defined time period] when system usage or the need-to-know changes for an individual.
+
+h. Require that users log out of the system after [Assignment: organization-defined time period] of expected inactivity or when [Assignment: organization-defined circumstances].}&{Y}&{Y}&{IPA groups are in place for summit and unix groups at SLAC which restrict privileges of individual users.
+Off boarding and account disabling  in place - considering active account with monthly reaffirmation instead. } \\ \hline
+{03.01.02 Access Enforcement
+Enforce approved authorizations for logical access to CUI and system resources in
+accordance with applicable access control policies.}&{Y}&{Y}&{IPA groups are in place on the summit restriiiicting users abilities. Legacy systems use the active directory groups for this.} \\ \hline
+{03.01.03 Information Flow Enforcement
+Enforce approved authorizations for controlling the flow of CUI within the system and between connected systems.}&{Y}&{Y}&{DMTN-199 defines the control flow for pixel data. Its implentation enforces it.} \\ \hline
+{03.01.04 Separation of Duties
+
+a. Identify the duties of individuals requiring separation.
+
+b. Define system access authorizations to support separation of duties.}&{Y}&{Y}&{Principle of least privilege is applied. Some users have access to hosts that is unneeded.} \\ \hline
+{03.01.05 Least Privilege
+
+a. Allow only authorized system access for users (or processes acting on behalf of users) that is necessary to accomplish assigned organizational tasks.
+
+b. Authorize access to [Assignment: organization-defined security functions] and [Assignment: organization-defined security-relevant information].
+
+c. Review the privileges assigned to roles or classes of users [Assignment: organization-defined frequency] to validate the need for such privileges.
+
+d. Reassign or remove privileges, as necessary.}&{N}&{P}&{Targeted sudo rules are needed for common operations. IPA controls sudo centrally } \\ \hline
+{03.01.06 Least Privilege – Privileged Accounts
+
+a. Restrict privileged accounts on the system to [Assignment: organization-defined personnel or roles].
+
+b. Require that users (or roles) with privileged accounts use non-privileged accounts when accessing non-security functions or non-security information.  
+  }&{N}&{P}& \\ \hline
+{03.01.07 Least Privilege – Privileged Functions
+
+a. Prevent non-privileged users from executing privileged functions.
+
+b. Log the execution of privileged functions.}&{Y}&{Y}&{We log sudo attempts .} \\ \hline
+{03.01.08 Unsuccessful Logon Attempts
+
+a. Enforce a limit of [Assignment: organization-defined number] consecutive invalid logon attempts by a user during a [Assignment: organization-defined time period].
+
+b. Automatically [Selection (one or more): lock the account or node for an [Assignment: organization-defined time period]; lock the account or node until released by an administrator; delay next logon prompt; notify system administrator; take other action] when the maximum number of unsuccessful attempts is exceeded.
+}&{Y}&{Y}&{Web Services such as love, foreman, ipa console, nublado, etc. may need rate limiting. We don't use passwords in ssh hosts, only ssh keys (which many consider more secure).  We are not aware of a retry limit for ssh-key access; an appropriate extra level of security would be to not use the default port 22. However, we do limit attempts to 6 with a block of 600 minutes, which will effectively block failed SUDO logins.} \\ \hline
+{03.01.09 System Use Notification. 
+Display a system use notification message with privacy and security notices
+consistent with applicable CUI rules before granting access to the system.}&{N}&{Y}&{Check login notices etc. A login banner can be displayed upon login } \\ \hline
+{03.01.10 Device Lock
+
+a. Prevent access to the system by [Selection (one or more): initiating a device lock after [Assignment: organization-defined time period] of inactivity; requiring the user to initiate a device lock before leaving the system unattended].
+
+b. Retain the device lock until the user reestablishes access using established identification and authentication procedures.
+
+c. Conceal, via the device lock, information previously visible on the display with a publicly viewable image.}&{Y}&{Y}&{This is our policy.} \\ \hline
+{03.01.11 Session Termination. 
+Terminate a user session automatically after [Assignment: organization-defined
+conditions or trigger events requiring session disconnect].}&{Y}&{Y}&{ssh sessions are generally not limited on hosts but VPN will timeout daily; some network equipment has timeouts set;} \\ \hline
+{03.01.12 Remote Access
+
+a. Establish usage restrictions, configuration requirements, and connection requirements for each type of allowable remote system access.
+
+b. Authorize each type of remote system access prior to establishing such connections.
+
+c. Route remote access to the system through authorized and managed access control points.
+
+d. Authorize the remote execution of privileged commands and remote access to security-relevant information.}&{Y}&{Y}&{We currently check who and from where is connecting. IPA groups conrol access (and 2FA VPN). Bastion nodes are used to control ingress. UNIX groups are used at SLAC for access control.} \\ \hline
+{03.01.13 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.01.14 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.01.15 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.01.16 Wireless Access
+
+a. Establish usage restrictions, configuration requirements, and connection requirements for each type of wireless access to the system.
+
+b. Authorize each type of wireless access to the system prior to establishing such connections.
+
+c. Disable, when not intended for use, wireless networking capabilities prior to issuance and deployment.
+
+d. Protect wireless access to the system using authentication and encryption.}&{Y}&{Y}&{All devices attaching in Chile need to be registered by Mac address. We  further consider still requiring 2FA VPN to access privileged systems from the WiFi.} \\ \hline
+{03.01.17 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.01.18 Access Control for Mobile Devices
+
+a. Establish usage restrictions, configuration requirements, and connection requirements for mobile devices.
+
+b. Authorize the connection of mobile devices to the system.
+
+c. Implement full-device or container-based encryption to protect the confidentiality of CUI on mobile devices.}&{Y}&{Y}&{Mobile devices must be registered on the summit - mobile devices do not contain pixel data.  In the case where an image may exist on say commissioning team laptop we will have disk encryption enabled. } \\ \hline
+{03.01.19 Withdrawn}&{Y}&{Y}&{Withdrawn in revision 3} \\ \hline
+{03.01.20 Use of External Systems
+
+a. Prohibit the use of external systems unless the systems are specifically authorized.
+
+b. Establish the following security requirements to be satisfied on external systems prior to allowing use of or access to those systems by authorized individuals: [Assignment: organization-defined security requirements].
+
+c. Permit authorized individuals to use external systems to access the organizational system or to process, store, or transmit CUI only after:
+
+1. Verifying that the security requirements on the external systems as specified in the organization’s system security plans have been satisfied and
+
+2. Retaining approved system connection or processing agreements with the organizational entities hosting the external systems.
+
+d. Restrict the use of organization-controlled portable storage devices by authorized individuals on external systems.}&{Y}&{Y}&{We use mac address for laptops and personal mobile phones can not connect to the control network. We also have a separation with the \gls{LHN} \gls{SSID} and \gls{VLAN}s.
+We do not allow external storage devices ont eh contrl network.} \\ \hline
+{03.01.21 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.01.22 Publicly Accessible Content
+
+a. Train authorized individuals to ensure that publicly accessible information does not contain CUI.
+
+b. Review the content on publicly accessible systems for CUI and remove such information, if discovered.}&{Y}&{Y}&{We do not intend to post images on publicly accessible systems. (DMTN-286). We intend to roll out training.} \\ \hline
 {3.2 AWARENESS AND TRAINING}&&& \\ \hline
-{3.2.1 Ensure that managers, systems administrators, and users of organizational systems are made aware of the security risks associated with their activities and of the applicable policies, standards, and procedures related to the security of those systems.}&{Y}&{Y}& \\ \hline
-{3.2.2 Ensure that personnel are trained to carry out their assigned information security-related duties and responsibilities.}&{P}&{Y}&{OUO trainign at SLAC} \\ \hline
-{3.2.3 Provide security awareness training on recognizing and reporting potential indicators of insider threat.}&{Y}&{Y}&{We would like to do more here like capture flag exercises for developers or blue/red teams events} \\ \hline
+{03.02.01 Literacy Training and Awareness
+
+a. Provide security literacy training to system users:
+
+1. As part of initial training for new users and [Assignment: organization-defined frequency] thereafter,
+
+2. When required by system changes or following [Assignment: organization-defined events], and
+
+3. On recognizing and reporting indicators of insider threat, social engineering, and social mining.
+
+b. Update security literacy training content [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].
+}&{Y}&{Y}&{A specific course for DMTN-199 is in prep. Each org has cyber security training already.} \\ \hline
+{03.02.02 Role-Based Training
+
+a. Provide role-based security training to organizational personnel:
+
+1. Before authorizing access to the system or CUI, before performing assigned duties, and [Assignment: organization-defined frequency] thereafter
+
+2. When required by system changes or following [Assignment: organization- defined events].
+
+b. Update role-based training content [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].}&{P}&{Y}&{OUO training at SLAC, DMTN-199 training for commissioners, Specific training for satellite catalog handlers.
+
+We would like to do more here like capture flag exercises for developers or blue/red teams events.
+
+Cyber training is annual.} \\ \hline
+{03.02.03 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
 {3.3 AUDIT AND ACCOUNTABILITY}&&& \\ \hline
-{3.3.1 Create and retain system audit logs and records to the extent needed to enable the monitoring, analysis, investigation, and reporting of unlawful or unauthorized system activity.}&{Y}&{Y}& \\ \hline
-{3.3.2 Ensure that the actions of individual system users can be uniquely traced to those users, so they can be held accountable for their actions.}&{Y}&{Y}& \\ \hline
-{3.3.3 Review and update logged events.}&{P}&{Y}&{We may look for a third party contract for this.} \\ \hline
-{3.3.4 Alert in the event of an audit logging process failure.}&{N}&{Y}& \\ \hline
-{3.3.5 Correlate audit record review, analysis, and reporting processes for investigation and response to indications of unlawful, unauthorized, suspicious, or unusual activity.}&{N}&{Y}&{Again shall look for third party contract for this} \\ \hline
-{3.3.6 Provide audit record reduction and report generation to support on-demand analysis and reporting.}&{Y}&{Y}&{Observability system} \\ \hline
-{3.3.7 Provide a system capability that compares and synchronizes internal system clocks with an authoritative source to generate timestamps for audit records.}&{Y}&{Y}& \\ \hline
-{3.3.8 Protect audit information and audit logging tools from unauthorized access, modification, and deletion.}&{Y}&{Y}& \\ \hline
-{3.3.9 Limit management of audit logging functionality to a subset of privileged users.}&{Y}&{Y}& \\ \hline
+{03.03.01 Event Logging
+
+a. Specify the following event types selected for logging within the system: [Assignment: organization-defined event types].
+
+b. Review and update the event types selected for logging [Assignment: organization-defined frequency].}&{Y}&{Y}&{Observability contract.} \\ \hline
+{03.03.02 Audit Record Content
+a. Include the following content in audit records:
+
+1. What type of event occurred
+
+2. When the event occurred
+
+3. Where the event occurred
+
+4. Source of the event
+
+5. Outcome of the event
+
+6. Identity of the individuals, subjects, objects, or entities associated with the event
+
+b. Provide additional information for audit records as needed.}&{N}&{Y}& \\ \hline
+{03.03.03 Audit Record Generation
+
+a. Generate audit records for the selected event types and audit record content specified in 03.03.01 and 03.03.02.
+
+b. Retain audit records for a time period consistent with the records retention policy.}&{P}&{Y}&{We may look for a third party contract for this.} \\ \hline
+{03.03.04 Response to Audit Logging Process Failures
+
+a. Alert organizational personnel or roles within [Assignment: organization-defined time period] in the event of an audit logging process failure.
+
+b. Take the following additional actions: [Assignment: organization-defined additional actions].}&{N}&{Y}& \\ \hline
+{03.03.05 Audit Record Review, Analysis, and Reporting
+
+a. Review and analyze system audit records [Assignment: organization-defined frequency] for indications and the potential impact of inappropriate or unusual activity.
+
+b. Report findings to organizational personnel or roles.
+
+c. Analyze and correlate audit records across different repositories to gain organization-wide situational awareness.}&{N}&{Y}&{Again shall look for third party contract for this} \\ \hline
+{03.03.06 Audit Record Reduction and Report Generation
+
+a. Implement an audit record reduction and report generation capability that supports audit record review, analysis, reporting requirements, and after-the-fact investigations of incidents.
+
+b. Preserve the original content and time ordering of audit records.}&{Y}&{Y}&{Observability system} \\ \hline
+{03.03.07 Time Stamps
+
+a. Use internal system clocks to generate time stamps for audit records.
+
+b. Record time stamps for audit records that meet [Assignment: organization-defined granularity of time measurement] and that use Coordinated Universal Time (UTC), have a fixed local time offset from UTC, or include the local time offset as part of the time stamp.}&{Y}&{Y}& \\ \hline
+{03.03.08 Protection of Audit Information
+
+a. Protect audit information and audit logging tools from unauthorized access, modification, and deletion.
+
+b. Authorize access to management of audit logging functionality to only a subset of privileged users or roles.}&{Y}&{Y}&{Only specific admin users have access to audit logs} \\ \hline
+{03.03.09 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
 {3.4 CONFIGURATION MANAGEMENT}&&& \\ \hline
-{3.4.1 Establish and maintain baseline configurations and inventories of organizational systems (including hardware, software, firmware, and documentation) throughout the respective system development life cycles.}&{Y}&{Y}&{We use mainly infrastructure as code approaches so the software is well tracked. IT inventory all the hardware. } \\ \hline
-{3.4.2 Establish and enforce security configuration settings for information technology products employed in organizational systems.}&{Y}&{Y}& \\ \hline
-{3.4.3 Track, review, approve or disapprove, and log changes to organizational systems.}&{Y}&{Y}&{We have CCBs and code change process in place which also cover the infrastructure as code. } \\ \hline
-{3.4.4 Analyze the security impact of changes prior to implementation.}&{Y}&{Y}& \\ \hline
-{3.4.5 Define, document, approve, and enforce physical and logical access restrictions associated with changes to organizational systems.}&{Y}&{Y}& \\ \hline
-{3.4.6 Employ the principle of least functionality by configuring organizational systems to provide only essential capabilities.}&{Y}&{Y}& \\ \hline
-{3.4.7 Restrict, disable, or prevent the use of nonessential programs, functions, ports, protocols, and services.}&{Y}&{Y}&{We get a lot of this by mainly containerizing the applications and having users work within deployed containers.} \\ \hline
-{3.4.8 Apply deny-by-exception (blacklisting) policy to prevent the use of unauthorized software or deny-all, permit-by-exception (whitelisting) policy to allow the execution of authorized software.}&{Y}&{Y}&{SUDO lists to restrict access  so users can not install applicaitons on the summit nor in SLAC (outside a container). } \\ \hline
-{3.4.9 Control and monitor user-installed software.}&{Y}&{Y}& \\ \hline
+{03.04.01 Baseline Configuration
+
+a. Develop and maintain under configuration control, a current baseline configuration of the system.
+
+b. Review and update the baseline configuration of the system [Assignment: organization-defined frequency] and when system components are installed or modified.}&{Y}&{Y}&{We use mainly infrastructure as code approaches so the software is well tracked. IT inventory all the hardware. } \\ \hline
+{03.04.02 Configuration Settings
+
+a. Establish, document, and implement the following configuration settings for the system that reflect the most restrictive mode consistent with operational requirements: [Assignment: organization-defined configuration settings].
+
+b. Identify, document, and approve any deviations from established configuration settings.}&{Y}&{Y}&{ConConfiguration settings are defined and documented in the lsst-it rancher, puppet  and phalanx repos. } \\ \hline
+{03.04.03 Configuration Change Control
+
+a. Define the types of changes to the system that are configuration-controlled.
+
+b. Review proposed configuration-controlled changes to the system, and approve
+or disapprove such changes with explicit consideration for security impacts.
+
+c. Implement and document approved configuration-controlled changes to the
+system.
+
+d. Monitor and review activities associated with configuration-controlled changes
+to the system.}&{Y}&{Y}&{We have an operatons CCB (https://rtn-072.lsst.io/)  and code change process in place which also cover the infrastructure as code. } \\ \hline
+{03.04.04 Impact Analyses
+
+a. Analyze changes to the system to determine potential security impacts prior to change implementation.
+
+b. Verify that the security requirements for the system continue to be satisfied after the system changes have been implemented.}&{Y}&{Y}&{Continuous integrations checks on puppet and phalanx check any changes prior to test deploy which is done prior to production. } \\ \hline
+{03.04.05 Access Restrictions for Change
+
+Define, document, approve, and enforce physical and logical access restrictions associated with changes to the system.}&{Y}&{Y}&{At infrastructure level this is is controlled by the Chile DevOps team and the SLAC IT team.} \\ \hline
+{03.04.06 Least Functionality
+
+a. Configure the system to provide only mission-essential capabilities.
+
+b. Prohibit or restrict use of the following functions, ports, protocols, connections, and services: [Assignment: organization-defined functions, ports, protocols, connections, and services].
+
+c. Review the system [Assignment: organization-defined frequency] to identify unnecessary or nonsecure functions, ports, protocols, connections, and services.
+
+d. Disable or remove functions, ports, protocols, connections, and services that are unnecessary or nonsecure.}&{Y}&{Y}&{Most application level functionality is controlled via phalanx. The OS level is puppet controlled.} \\ \hline
+{03.04.07 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.04.08 Authorized Software – Allow by Exception
+
+a. Identify software programs authorized to execute on the system.
+
+b. Implement a deny-all, allow-by-exception policy for the execution of authorized software programs on the system.
+
+c. Review and update the list of authorized software programs [Assignment: organization-defined frequency].}&{Y}&{Y}&{SUDO lists restrict access so users can not install applications on the summit nor in SLAC (outside a container). Mainly we containerize the applications and have users work within deployed containers. All containers are controlled/deployed via phalanx configuration.} \\ \hline
+{03.04.09 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.04.10 System Component Inventory
+
+a. Develop and document an inventory of system components.
+
+b. Review and update the system component inventory [Assignment: organization-
+defined frequency].
+
+c. Update the system component inventory as part of installations, removals, and
+system updates.}&{Y}&{Y}&{phalanx.lsst.io} \\ \hline
+{03.04.11 Information Location
+
+a. Identify and document the location of CUI and the system components on which
+the information is processed and stored.
+
+b. Document changes to the system or system component location where CUI is
+processed and stored.}&{Y}&{Y}&{DMTN-199- Embargo rack and pixel zones are our places for restricted items.} \\ \hline
+{03.04.12 System and Component Configuration for High-Risk Areas
+
+a. Issue systems or system components with the following configurations to
+individuals traveling to high-risk locations: [Assignment: organization-defined
+system configurations].
+
+b. Apply the following security requirements to the systems or components when
+the individuals return from travel: [Assignment: organization-defined security
+requirements].}&{N}&{N}&{Though people self select to remove vaults and carry clean personal devices we do not have a strict policy nor do we have a list of high risk areas. In general there is no data on peoples machines so it is account/password vulnerability we would need to cover.} \\ \hline
 {3.5 IDENTIFICATION AND AUTHENTICATION}&&& \\ \hline
-{3.5.1 Identify system users, processes acting on behalf of users, and devices.}&{Y}&{Y}& \\ \hline
-{3.5.2 Authenticate (or verify) the identities of users, processes, or devices, as a prerequisite to allowing access to organizational systems.}&{Y}&{Y}& \\ \hline
-{3.5.3 Use multifactor authentication for local and network access to privileged accounts and for network access to non-privileged accounts.}&{Y}&{Y}& \\ \hline
-{3.5.4 Employ replay-resistant authentication mechanisms for network access to privileged and non- privileged accounts.}&{Y}&{Y}& \\ \hline
-{3.5.5 Prevent reuse of identifiers for a defined period.}&{N}&{Y}& \\ \hline
-{3.5.6 Disable identifiers after a defined period of inactivity.}&{Y}&{Y}& \\ \hline
-{3.5.7 Enforce a minimum password complexity and change of characters when new passwords are created.}&{Y}&{Y}& \\ \hline
-{3.5.8 Prohibit password reuse for a specified number of generations.}&{Y}&{Y}& \\ \hline
-{3.5.9 Allow temporary password use for system logons with an immediate change to a permanent password.}&{Y}&{Y}& \\ \hline
-{3.5.10 Store and transmit only cryptographically-protected passwords.}&{Y}&{Y}& \\ \hline
-{3.5.11 Obscure feedback of authentication information.}&{Y}&{Y}& \\ \hline
+{03.05.01 User Identification and Authentication
+
+a. Uniquely identify and authenticate system users, and associate that unique identification with processes acting on behalf of those users.
+
+b. Re-authenticate users when [Assignment: organization-defined circumstances or situations requiring re-authentication].}&{Y}&{Y}&{Users are associated with their unique Unix accounts.
+
+Re-authentication is once per 24 hours. } \\ \hline
+{03.05.02 Device Identification and Authentication
+
+Uniquely identify and authenticate [Assignment: organization-defined devices or
+types of devices] before establishing a system connection.}&{Y}&{Y}&{Users access via VPN with a 2FA device (DUO or 1password)} \\ \hline
+{03.05.03 Multi-Factor Authentication
+
+Implement multi-factor authentication for access to privileged and non-privileged accounts.}&{Y}&{Y}&{Summit uses 2FA - SLAC do no require this. } \\ \hline
+{03.05.04 Replay-Resistant Authentication
+
+Implement replay-resistant authentication mechanisms for access to privileged and non-privileged accounts.}&{Y}&{Y}&{Lockout after six failures.} \\ \hline
+{03.05.05 Identifier Management
+
+a. Receive authorization from organizational personnel or roles to assign an individual, group, role, service, or device identifier.
+
+b. Select and assign an identifier that identifies an individual, group, role, service, or device.
+
+c. Prevent the reuse of identifiers for [Assignment: organization-defined time period].
+
+d. Manage individual identifiers by uniquely identifying each individual as [Assignment: organization-defined characteristic identifying individual status].}&{P}&{P}&{a. Jira tickets are used and management approval requested
+
+b. Unique id is chosen
+
+c. Our IPA system does not support this. 
+
+d. Single sign on across all systems uses same id.} \\ \hline
+{03.05.06 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.05.07 Password Management
+
+a. Maintain a list of commonly-used, expected, or compromised passwords, and update the list [Assignment: organization-defined frequency] and when organizational passwords are suspected to have been compromised.
+
+b. Verify that passwords are not found on the list of commonly used, expected, or compromised passwords when users create or update passwords.
+
+c. Transmit passwords only over cryptographically protected channels.
+
+d. Store passwords in a cryptographically protected form.
+
+e. Select a new password upon first use after account recovery.
+
+f. Enforce the following composition and complexity rules for passwords: [Assignment: organization-defined composition and complexity rules].}&{Y}&{Y}&{a. For the few system passwords we have  a gnerator is used such as 1password. 
+
+b. We do use https://haveibeenpwned.com/Passwords
+
+c. Passwords than must be shared are shared via 1password vaults. For users onetimesecret is used to pass an initial password which must then be replaced.
+
+d. 1password is used for passwords
+
+e. account recovery typically starts with a new password the user must then replace. 
+
+f. complex passwords are required.} \\ \hline
+{03.05.08 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.05.09 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.05.10 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.05.11 Authentication Feedback
+
+Obscure feedback of authentication information during the authentication process.}&{Y}&{Y}&{Passwords are not echoed on any system.} \\ \hline
+{03.05.12 Authenticator Management
+
+a. Verify the identity of the individual, group, role, service, or device receiving the authenticator as part of the initial authenticator distribution.
+
+b. Establish initial authenticator content for any authenticators issued by the organization.
+
+c. Establish and implement administrative procedures for initial authenticator distribution; for lost, compromised, or damaged authenticators; and for revoking authenticators.
+
+d. Change default authenticators at first use.
+
+e. Change or refresh authenticators [Assignment: organization-defined frequency] or when the following events occur: [Assignment: organization-defined events].
+
+f. Protect authenticator content from unauthorized disclosure and modification.}&{N}&{N}&{This applies mainly to passwords for us. We pass passwords with onetimesecret and then ask the user to change it immediately. } \\ \hline
 {3.6 INCIDENT RESPONSE}&&& \\ \hline
-{3.6.1 Establish an operational incident-handling capability for organizational systems that includes preparation, detection, analysis, containment, recovery, and user response activities.}&{Y}&{Y}&{AURA have insurance which covers this. But we really should have a contract to look over logs etc. to note when we are hit.} \\ \hline
-{3.6.2 Track, document, and report incidents to designated officials and/or authorities both internal and external to the organization.}&{Y}&{Y}& \\ \hline
-{3.6.3 Test the organizational incident response capability.}&{Y}&{Y}&{This was done at least witht he PEN testing - which we shall repeat.} \\ \hline
+{03.06.01 Incident Handling
+
+Implement an incident-handling capability that is consistent with the incident
+response plan and includes preparation, detection and analysis, containment,
+eradication, and recovery. }&{Y}&{Y}&{Inceident hadling/response is in place. 
+
+AURA also have insurance for serious incursions.} \\ \hline
+{03.06.02 Incident Monitoring, Reporting, and Response Assistance
+
+a. Track and document system security incidents.
+
+b. Report suspected incidents to the organizational incident response capability within [Assignment: organization-defined time period].
+
+c. Report incident information to [Assignment: organization-defined authorities].
+
+d. Provide an incident response support resource that offers advice and assistance to system users on handling and reporting incidents.}&{Y}&{Y}&{We track and report incidents.
+
+AURA insurance can provide furhter support if needed.} \\ \hline
+{03.06.03 Incident Response Testing
+
+Test the effectiveness of the incident response capability [Assignment: organization-defined frequency].}&{Y}&{Y}&{This was done at least with the PEN testing - which we shall repeat.} \\ \hline
+{03.06.04 Incident Response Training
+
+a. Provide incident response training to system users consistent with assigned roles and responsibilities:
+
+1. Within [Assignment: organization-defined time period] of assuming an incident response role or responsibility or acquiring system access,
+
+2. When required by system changes, and
+
+3. [Assignment: organization-defined frequency] thereafter.
+
+b. Review and update incident response training content [Assignment: organization-defined frequency] and following [Assignment: organization-defined events].}&{Y}&{Y}&{Cyber training includes user level incedent response i.e. who to report attempts to. } \\ \hline
+{03.06.05 Incident Response Plan
+
+a. Develop an incident response plan that:
+
+1. Provides the organization with a roadmap for implementing its incident response capability,
+
+2. Describes the structure and organization of the incident response capability,
+
+3. Provides a high-level approach for how the incident response capability fits into the overall organization,
+
+4. Defines reportable incidents,
+
+5. Addresses the sharing of incident information, and
+
+6. Designates responsibilities to organizational entities, personnel, or roles.
+
+b. Distribute copies of the incident response plan to designated incident response personnel (identified by name and/or by role) and organizational elements.
+
+c. Update the incident response plan to address system and organizational changes or problems encountered during plan implementation, execution, or testing.
+
+d. Protect the incident response plan from unauthorized disclosure.}&{Y}&{Y}&{RTN-030 Section 3.} \\ \hline
 {3.7 MAINTENANCE}&&& \\ \hline
-{3.7.1 Perform maintenance on organizational systems.}&{Y}&{Y}& \\ \hline
-{3.7.2 Provide controls on the tools, techniques, mechanisms, and personnel used to conduct system maintenance.}&{Y}&{Y}& \\ \hline
-{3.7.3 Ensure equipment removed for off-site maintenance is sanitized of any CUI.}&{Y}&{Y}& \\ \hline
-{3.7.4 Check media containing diagnostic and test programs for malicious code before the media are used in organizational systems.}&{Y}&{Y}& \\ \hline
-{3.7.5 Require multifactor authentication to establish nonlocal maintenance sessions via external network connections and terminate such connections when nonlocal maintenance is complete.}&{Y}&{Y}& \\ \hline
-{3.7.6 Supervise the maintenance activities of maintenance personnel without required access authorization.}&{Y}&{Y}& \\ \hline
+{03.07.01 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.07.02 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.07.03 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.07.04 Maintenance Tools
+
+a. Approve, control, and monitor the use of system maintenance tools.
+
+b. Check media with diagnostic and test programs for malicious code before it is used in the system.
+
+c. Prevent the removal of system maintenance equipment containing CUI by verifying that there is no CUI on the equipment, sanitizing or destroying the equipment, or retaining the equipment within the facility.}&{Y}&{Y}&{a. Maintenance tools go through the requisition process - hence at least 2 managers approve. 
+
+b. We run scans on downloaded media.
+
+c. Maintenance equipment doe snot have CUI on it. } \\ \hline
+{03.07.05 Nonlocal Maintenance
+
+a. Approve and monitor nonlocal maintenance and diagnostic activities.
+
+b. Implement multi-factor authentication and replay resistance in the establishment of nonlocal maintenance and diagnostic sessions.
+
+c. Terminate session and network connections when nonlocal maintenance is completed.}&{Y}&{Y}&{a. Activities are always Jira ticketed
+
+b. 2FA is always needed to access pixel zone.
+
+c. Policy is to log off when done.} \\ \hline
+{03.07.06 Maintenance Personnel
+
+a. Establish a process for maintenance personnel authorization.
+
+b. Maintain a list of authorized maintenance organizations or personnel.
+
+c. Verify that non-escorted personnel who perform maintenance on the system possess the required access authorizations.}&{Y}&{Y}&{In general our staff do the maintenance. 
+On occasion when we have remote assistance credentials are granted for a limited time and work is carried out with our staff. } \\ \hline
 {3.8 MEDIA PROTECTION}&&& \\ \hline
-{3.8.1 Protect (i.e., physically control and securely store) system media containing CUI, both paper and digital.}&{Y}&{Y}&{Pixel Zone and Embago Rack} \\ \hline
-{3.8.2 Limit access to CUI on system media to authorized users.}&{Y}&{Y}&{Pixel Zone and Embago Rack} \\ \hline
-{3.8.3 Sanitize or destroy system media containing CUI before disposal or release for reuse.}&{Y}&{Y}& \\ \hline
-{3.8.4 Mark media with necessary CUI markings and distribution limitations.}&{N}&{Y}&{We decline to label rooms and machines acording to https://www.archives.gov/files/cui/20161206-cui-marking-handbook-v1-1.pdf} \\ \hline
-{3.8.5 Control access to media containing CUI and maintain accountability for media during transport outside of controlled areas.}&{Y}&{Y}& \\ \hline
-{3.8.6 Implement cryptographic mechanisms to protect the confidentiality of CUI stored on digital media during transport unless otherwise protected by alternative physical safeguards.}&{Y}&{Y}& \\ \hline
-{3.8.7 Control the use of removable media on system components.}&{N}&{Y}&{Can be rolled out with puppet but there are some servers that need usb. } \\ \hline
-{3.8.8 Prohibit the use of portable storage devices when such devices have no identifiable owner.}&{Y}&{Y}& \\ \hline
-{3.8.9 Protect the confidentiality of backup CUI at storage locations.}&{Y}&{Y}& \\ \hline
+{03.08.01 Media Storage
+
+Physically control and securely store system media that contain CUI.}&{Y}&{Y}&{Pixel Zone and Embago Rack} \\ \hline
+{03.08.02 Media Access
+
+Restrict access to CUI on system media to authorized personnel or roles.}&{Y}&{Y}&{Pixel Zone and Embago Rack} \\ \hline
+{03.08.03 Media Sanitization
+
+Sanitize system media that contain CUI prior to disposal, release out of organizational control, or release for reuse.}&{Y}&{Y}&{We format/clean all devices prior to disposal/reuse.} \\ \hline
+{03.08.04 Media Marking
+
+Mark system media that contain CUI to indicate distribution limitations, handling
+caveats, and applicable CUI markings.}&{Y}&{Y}&{We do not use any removable media for embargo information.} \\ \hline
+{03.08.05 Media Transport
+
+a. Protect and control system media that contain CUI during transport outside of controlled areas.
+
+b. Maintain accountability of system media that contain CUI during transport outside of controlled areas.
+
+c. Document activities associated with the transport of system media that contain CUI.}&{Y}&{Y}&{We do not use any removable media for embargo information. All transfers are over secure links.} \\ \hline
+{03.08.06 Withdrawn}&{W}&{ }&{Withdrawn in revision 3} \\ \hline
+{03.08.07 Media Use
+
+a. Restrict or prohibit the use of [Assignment: organization-defined types of system media].
+
+b. Prohibit the use of removable system media without an identifiable owner.}&{N}&{Y}&{Can be rolled out with puppet but there are some servers require USB to be enabled but are in the server room. We disable USB on machines outside the server room.} \\ \hline
+{03.08.08 Withdrawn}&{W}&{}&{Withdrawn in revision 3} \\ \hline
+{03.08.09 System Backup – Cryptographic Protection
+
+a. Protect the confidentiality of backup information.
+
+b. Implement cryptographic mechanisms to prevent the unauthorized disclosure of CUI at backup storage locations.}&{Y}&{Y}&{Pixel data is in only three locations - two in Chile and SLAC. There are no backups during embargo.} \\ \hline
 {3.9 PERSONNEL SECURITY}&&& \\ \hline
-{3.9.1 Screen individuals prior to authorizing access to organizational systems containing CUI.}&{Y}&{Y}&{Only project team members will have access to early images - all are know individuals. This doesn't suggest background security screening and it was also explicitly not required by the agencies in section 2 of the requirements document. } \\ \hline
-{3.9.2 Ensure that organizational systems containing CUI are protected during and after personnel actions such as terminations and transfers.}&{Y}&{Y}& \\ \hline
+{03.09.01 Personnel Screening
+
+a. Screen individuals prior to authorizing access to the system.
+
+b. Rescreen individuals in accordance with [Assignment: organization-defined conditions requiring rescreening].}&{Y}&{Y}&{Only project team members will have access to early images - all are known individuals screened on hiring. This doesn't suggest background security screening and it was also explicitly not required by the agencies in section 2 of the requirements document. } \\ \hline
+{03.09.02 Personnel Termination and Transfer
+
+a. When individual employment is terminated:
+
+1. Disable system access within [Assignment: organization-defined time period],
+
+2. Terminate or revoke authenticators and credentials associated with the individual, and
+
+3. Retrieve security-related system property.
+
+b. When individuals are reassigned or transferred to other positions in the organization:
+
+1. Review and confirm the ongoing operational need for current logical and physical access authorizations to the system and facility, and
+
+2. Modify access authorization to correspond with any changes in operational need.}&{Y}&{Y}&{This is the offbording policy. Note that many collaborators retain some level of access even when offbarded.} \\ \hline
 {3.10 PHYSICAL PROTECTION}&&& \\ \hline
 {3.10.1 Limit physical access to organizational systems, equipment, and the respective operating environments to authorized individuals.}&{Y}&{Y}&{This physical access includes locks on server cabinets and key card access in base. (Contracted for summit) } \\ \hline
 {3.10.2 Protect and monitor the physical facility and support infrastructure for organizational systems.}&{Y}&{Y}&{Security is in place on Cero Pachon and at the entrance to the mountain - though not only for Rubin so not permanently at the observatory. } \\ \hline
@@ -106,8 +541,9 @@
 {3.13.4 Prevent unauthorized and unintended information transfer via shared system resources.}&{Y}&{Y}&{DMTN-286 and SITCOMTN-076 cover ground rules on this} \\ \hline
 {3.13.5 Implement subnetworks for publicly accessible system components that are physically or logically separated from internal networks.}&{Y}&{Y}& \\ \hline
 {3.13.6 Deny network communications traffic by default and allow network communications traffic by exception (i.e., deny all, permit by exception).}&{Y}&{Y}&{We may need to bring up iptables on each host} \\ \hline
-{3.13.7 Prevent remote devices from simultaneously establishing non-remote connections with organizational systems and communicating via some other connection to resources in external networks (i.e., split tunneling).}&{Y}&{Y}& \\ \hline
-{3.13.8 Implement cryptographic mechanisms to prevent unauthorized disclosure of CUI during transmission unless otherwise protected by alternative physical safeguards.}&{Y}&{Y}&{IPSec and encryption at rest} \\ \hline
+{03.13.07 Withdrawn}&{Y}&{Y}&{Withdrawn in revision 3} \\ \hline
+{03.13.08 Transmission and Storage Confidentiality
+Implement cryptographic mechanisms to prevent the unauthorized disclosure of CUI during transmission and while in storage.}&{Y}&{Y}&{IPSec and encryption at rest. 2FA VPN to access summit.} \\ \hline
 {3.13.9 Terminate network connections associated with communications sessions at the end of the sessions or after a defined period of inactivity.}&{Y}&{Y}& \\ \hline
 {3.13.10 Establish and manage cryptographic keys for cryptography employed in organizational systems.}&{Y}&{Y}& \\ \hline
 {3.13.11 Employ FIPS-validated cryptography when used to protect the confidentiality of CUI.}&{Y}&{Y}& \\ \hline
@@ -123,7 +559,7 @@
 {3.14.4 Update malicious code protection mechanisms when new releases are available.}&{Y}&{Y}& \\ \hline
 {3.14.5 Perform periodic scans of organizational systems and real-time scans of files from external sources as files are downloaded, opened, or executed.}&{Y}&{Y}& \\ \hline
 {3.14.6 Monitor organizational systems, including inbound and outbound communications traffic, to detect attacks and indicators of potential attacks.}&{Y}&{Y}& \\ \hline
-\textbf{Total requirements}&\textbf{}&\textbf{108}& \\ \hline
-\textbf{Total Rubin Intends to comply with }&\textbf{}&\textbf{107}& \\ \hline
-\textbf{Total Rubin Complies with in 2024}&\textbf{}&\textbf{95}& \\ \hline
+\textbf{Total requirements}&\textbf{}&\textbf{114}& \\ \hline
+\textbf{Total Rubin Intends to comply with }&\textbf{}&\textbf{90}& \\ \hline
+\textbf{Total Rubin Complies with in 2024}&\textbf{}&\textbf{83}& \\ \hline
 \end{longtable} \normalsize
