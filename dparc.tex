@@ -4,7 +4,6 @@
 \section{Data Management system architecture} \label{sec:dparc}
 The overall system architecture is available in \citeds{LDM-148}.
 Details on the \gls{USDF} specifications are given in \citeds{DMTN-189}.
-\action{GS,FH}{March 2022}{Should we have Specs like \gls{DMTN}-189 for UK and FRdF ?}
 
 \secref{sec:desc} gives a high level overview of the system, architecturally we look
 at this as a set of enclaves.
@@ -19,7 +18,7 @@ These enclaves are further described here and for each a series of subsections e
 \item Disaster recovery
 \end{enumerate}
 
-\subsection{Prompt \gls{Enclave}}
+\subsection{Prompt \gls{Enclave}} \label{sec:promptenc}
 
 The Prompt enclave receives images from the Observatory facilities in Chile via a Long Haul Network connection.
 It stores these and processes them into Prompt data products of three main types:
@@ -39,7 +38,7 @@ The obvious threat surfaces here are :
 \begin{enumerate}
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
 \item Transmission to \gls{LLNL}.  This will be over internet using TLS.
-\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies. \action{RD}{March 2022}{ Need ref to SLAC security polices for users i.e. FACTS and all that. }
+\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies\footnote{\url{https://it.slac.stanford.edu/cybersecurity/compliance}}.
 \item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC \gls{VPN} and 2FA. These tools are also only accessible by staff and probably pose a low risk.
 \item The for the initial 10 days (30 in commissioning) after acquisition the data is maintain on encrypted disks with in the restricted \gls{OGA} rack.
 \end{enumerate}
@@ -47,7 +46,7 @@ The obvious threat surfaces here are :
 \subsubsection{Disaster recovery}
 All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
 In the case of a total wipe out of the \gls{OGA} systems use of Chef, docker etc allow redeployment rapidly.
-See also the \gls{SLAC} Rubin disaster recovery plan. \action{RD}{March 23}{Need a \gls{SLAC} disaster recover plan}.
+See also the \gls{SLAC} Rubin disaster recovery plan \citeds{RTN-078}.
 The back up for the embargoed data is the Chile OGA rack.
 
 \subsection{ Offline Production  \gls{Enclave}}
@@ -57,7 +56,7 @@ Each year (or more frequently), the Offline Production enclave takes the raw ima
 \subsubsection{ Threats and Security infrastructure}
 \begin{itemize}
 \item Offline production data is no longer embargoed ergo not considered under threat.
-\item Data could be intercepted in transfer between sites, however this is only performed after the embargo period hence the security risk is low.
+\item Although data exchange among the facilities uses encryption (secure HTTP over TLS), if data were to be intercepted in transfer between sites, this could only occur after the embargo period hence the security risk is low.
 \item Malicious users could disrupt data or processing.
 We are using standard tooling from \gls{HEP} which has been in use for many years and gives a level confidence of their suitability in this scientific endeavor.
 Still internal users remain a major risk - we maintain an inclusive project and try to avoid disgruntled team members.
@@ -69,7 +68,7 @@ Post embargo FrDF keeps a full copy of the raw data.
 The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
 As the permanent scientific record of the survey, no more than 1\% of the raw images or telemetry may be lost or corrupted according to Rubin requirements.
 
-To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
+To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and selected data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
 
 We intend to have a hybrid access model for the archive where  the \gls{RSP} users and user processing will be on Google cloud while the data resides at SLAC. A cache of images will be held on Google with a dedicated client pulling needed images from SLAC to google.
 
@@ -78,7 +77,7 @@ We intend to have a hybrid access model for the archive where  the \gls{RSP} use
 
 \begin{itemize}
 \item Archive data is no longer embargoed ergo not considered under threat.
-\item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC i for processing and archive and the more public facing \gls{RSP}.
+\item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC for processing and archive and the more public facing \gls{RSP}.
 \end{itemize}
 \subsubsection{Disaster recovery}
 Post embargo FrDF keeps a full copy of the raw data.
@@ -102,7 +101,6 @@ Hosting it on a cloud provider reduces risk considerably for the Archive enclave
 
 Backend archive services could provide another attack surface.
 These are governed by \gls{SLAC} security.
-\action{RD}{March 22}{Reference for security of archive services }
 
 \subsubsection{Disaster recovery}
 For user  spaces we rely on cloud provider redundancy/backup/recovery.
@@ -169,4 +167,4 @@ If unauthorized access occurs the impact is low in terms of system integrity - i
 
 \subsubsection{Disaster recovery}
 We are not concerned with disasters at IDACs.
-We can resend the appropriate data to them
+We can resend the appropriate data to them.

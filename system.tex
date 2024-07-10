@@ -1,13 +1,15 @@
 \section{System description} \label{sec:desc}
 
 \VRO produces around 20TB of astronomical data per night for the 10 year \gls{LSST}
-The control of the the observatory is part of Telescope and site and is covered in \secref{sec:tsarc}
-Data are processed in \gls{SLAC}, \gls{IN2P3} and ROE.
+The control of the the observatory is part of Telescope and site and is covered in \secref{sec:tsarc}.
+Data are processed in \gls{SLAC}, \gls{IN2P3} and \gls{ROE}.
 A publicly available alert stream emanates from the \gls{USDF} at \gls{SLAC}.
-Processing is the responsibility's of \gls{RDP} department while Quality Assurance is carried out under \gls{RPF} department.
+Processing is the responsibility's of \gls{RDP} department while \gls{Quality Assurance} is carried out under \gls{RPF} department.
 
 The Rubin \gls{Operations} Plan \citeds{RDO-018} gives more details.
-The USDF specification is in \citeds{DMTN-189} but some architecture details are provided in \secref{sec:dparc}.
+The \gls{USDF} specification is in \citeds{DMTN-189} but some architecture details are provided in \secref{sec:dparc}.
+
+
 
 
 
@@ -17,31 +19,43 @@ Members of the \gls{RPF} department assess the data quality at short and long ti
 They require access to tools installed at the summit as well as in the data facilities.
 In particular they will need access to images as they are processed to generate alerts.
 
-These team members will have to have \gls{SLAC} accounts to perform this work - \gls{SLAC} accounts are governed by (need doc).\action{RD}{Mar 2022}{Handle for doc covering users accounts at \gls{SLAC}}.
+These team members will have to have \gls{SLAC} accounts to perform this work - \gls{SLAC} accounts are governed by SLAC procedures \cite{SLACOB} and \cite{SLACNH}.
 In addition they will need summit accounts as governed by \citeds{ittn-045} and \citeds{ittn-010}.
 
 
 
 \subsection{Data processing}
+\subsubsection{Prompt  Processing}
+Prompt processing is performed on embargoed data with in SLAC's prompt processing enclave \secref{sec:promptenc}.
+This data is subject to \citep{ACP}.
+
 \subsubsection{Data Release Processing}
-DRP is performed only on unencumbered data which is fully available to Rubin Data Access rights holders.
+DRP is performed only on unembargoed data which is fully available to Rubin data rights holders.
 Processing is carried out at three sites.
-Each site has its own security policies (need doc refs) \action{RD,GS,FH}{Mar 2022}{Handle for security docs \gls{US},Fr,UK DFs}
+Each site has its own security policies:
+
+\begin{itemize}
+\item SLAC lists cyber policies on \url{https://it.slac.stanford.edu/cybersecurity/compliance}.
+\item UKDF falls under the \gls{IRIS} security policies listed on \url{https://www.iris.ac.uk/security/}.
+\item FrDF lists cyber policies and compliance on \url{https://doc.lsst.eu/cybersecurity/cybersecurity.html}.
+\end{itemize}
+
 
 
 \subsection{Data access}
-After a short period of encumbrance image and derived data are made available to all
+After a short embargo period image and derived data are made available to all
 data rights holders as defined in \citeds{LDO-13}.
 
-Front end data access via the \gls{RSP} will be hosted on a cloud provider such as Google.
-Thus not requiring community science users to have SLAC accounts.
+Front end data access via the \gls{RSP} will be hosted on a \gls{cloud} provider such as Google.
+Thus not requiring community science users to have \gls{SLAC} accounts.
 
-There will  be a \gls{DAC} in Chile to support Chilean users. The UK intends to host a DAC for UK users.
+There will  be a \gls{DAC} in Chile to support Chilean users.
+The \gls{UK} intends to host a DAC for \gls{UK} users.
 
 In addition there will be a set of \gls{IDAC}s which will usually serve a portion of the data e.g. perhaps only catalogs or only the object catalog.
 
 
-\subsection{Rubin Director's Office}
+\subsection{Rubin \gls{Director}'s Office}
 Rubin headquarters are in Tucson Arizona where a few services are also deployed such as Jira and Confluence.
 These are discussed more in \secref{sec:rdo}
 

@@ -7,9 +7,13 @@
 \newglossaryentry{Archive} {name={Archive}, description={The repository for documents required by the NSF to be kept. These include documents related to design and development, construction, integration, test, and operations of the LSST observatory system. The archive is maintained using the enterprise content management system DocuShare, which is accessible through a link on the project website www.project.lsst.org}}
 \newglossaryentry{Archive Center} {name={Archive Center}, description={Part of the LSST Data Management System, the LSST archive center is a data center at NCSA that hosts the LSST Archive, which includes released science data and metadata, observatory and engineering data, and supporting software such as the LSST Software Stack}}
 \newglossaryentry{Association of Universities for Research in Astronomy} {name={Association of Universities for Research in Astronomy}, description={ consortium of US institutions and international affiliates that operates world-class astronomical observatories, AURA is the legal entity responsible for managing what it calls independent operating Centers, including LSST, under respective cooperative agreements with the National Science Foundation. AURA assumes fiducial responsibility for the funds provided through those cooperative agreements. AURA also is the legal owner of the AURA Observatory properties in Chile}}
+\newglossaryentry{Authentication} {name={Authentication}, description={The action of demonstrating who you are and an person, mission, or other entity. Usually by use of a password or security token}}
+\newglossaryentry{Authorization} {name={Authorization}, description={The action of allowing an authorized or anonymous entity access to data or services.}}
 \newacronym{BTS} {BTS} {Base (La Serena) Test Stand}
+\newglossaryentry{Baseline} {name={Baseline}, description={The point at which project designs or requirements are considered to be 'frozen' and after which all changes must be traced and approved}}
 \newglossaryentry{Broker} {name={Broker}, description={Software which receives and redistributes Alerts, and may also perform processing such as filtering for certain characteristics, cross-matching with non-LSST catalogs, and/or light-curve classification, in order to identify and prioritize targets for follow-up and/or make scientific analyses. }}
 \newglossaryentry{Butler} {name={Butler}, description={A middleware component for persisting and retrieving image datasets (raw or processed), calibration reference data, and catalogs}}
+\newacronym{CCB} {CCB} {\gls{Change Control Board}}
 \newacronym{CCD} {CCD} {\gls{Charge-Coupled Device}}
 \newacronym{COS} {COS} {Center \gls{Operations} Services}
 \newacronym{CS} {CS} {citizen science}
@@ -17,6 +21,8 @@
 \newacronym{CUI} {CUI} {Controlled Unclassified Information}
 \newglossaryentry{Camera} {name={Camera}, description={The LSST subsystem responsible for the 3.2-gigapixel LSST camera, which will take more than 800 panoramic images of the sky every night. SLAC leads a consortium of Department of Energy laboratories to design and build the camera sensors, optics, electronics, cryostat, filters and filter exchange mechanism, and camera control system}}
 \newglossaryentry{Center} {name={Center}, description={An entity managed by AURA that is responsible for execution of a federally funded project}}
+\newglossaryentry{Change Control} {name={Change Control}, description={The systematic approach to managing all changes to the LSST system, including technical data and policy documentation. The purpose is to ensure that no unnecessary changes are made, all changes are documented, and resources are used efficiently and appropriately}}
+\newglossaryentry{Change Control Board} {name={Change Control Board}, description={Advisory board to the Project Manager; composed of technical and management representatives who recommend approval or disapproval of proposed changes to, deviations from, and waivers to a configuration item's current approved configuration documentation}}
 \newglossaryentry{Charge-Coupled Device} {name={Charge-Coupled Device}, description={a particular kind of solid-state sensor for detecting optical-band photons. It is composed of a 2-D array of pixels, and one or more read-out amplifiers}}
 \newacronym{ComCam} {ComCam} {The commissioning \gls{camera} is a single-raft, 9-CCD \gls{camera} that will be installed in LSST during commissioning, before the final \gls{camera} is ready.}
 \newglossaryentry{Commissioning} {name={Commissioning}, description={A two-year phase at the end of the Construction project during which a technical team a) integrates the various technical components of the three subsystems; b) shows their compliance with ICDs and system-level requirements as detailed in the LSST Observatory System Specifications document (OSS, LSE-30); and c) performs science verification to show compliance with the survey performance specifications as detailed in the LSST Science Requirements Document (SRD, LPM-17)}}
@@ -35,6 +41,7 @@
 \newacronym{DP} {DP} {Data Production}
 \newacronym{DR} {DR} {\gls{Data Release}}
 \newacronym{DRP} {DRP} {\gls{Data Release Production}}
+\newacronym{DWDM} {DWDM} {Dense Wave Division Multiplex}
 \newglossaryentry{Data Access Center} {name={Data Access Center}, description={Part of the LSST Data Management System, the US and Chilean DACs will provide authorized access to the released LSST data products, software such as the Science Platform, and computational resources for data analysis. The US DAC also includes a service for distributing bulk data on daily and annual (Data Release) timescales to partner institutions, collaborations, and LSST Education and Public Outreach (EPO). }}
 \newglossaryentry{Data Management} {name={Data Management}, description={The LSST Subsystem responsible for the Data Management System (DMS), which will capture, store, catalog, and serve the LSST dataset to the scientific community and public. The DM team is responsible for the DMS architecture, applications, middleware, infrastructure, algorithms, and Observatory Network Design. DM is a distributed team working at LSST and partner institutions, with the DM Subsystem Manager located at LSST headquarters in Tucson}}
 \newglossaryentry{Data Management Subsystem} {name={Data Management Subsystem}, description={The Data Management Subsystem is one of the four subsystems which constitute the LSST Construction Project. The Data Management Subsystem is responsible for developing and delivering the LSST Data Management System to the LSST Operations Project}}
@@ -55,19 +62,23 @@
 \newglossaryentry{Enclave} {name={Enclave}, description={Individually defined portions of the computational resources at the Summit, Base, NCSA, and Satellite Facilities, such as the Prompt Enclave, the Archive Enclave, etc. }}
 \newacronym{FIPS} {FIPS} {Federal Information Processing Standards}
 \newacronym{FITS} {FITS} {\gls{Flexible Image Transport System}}
+\newacronym{FRDF} {FRDF} {French Data Facility}
 \newglossaryentry{Flexible Image Transport System} {name={Flexible Image Transport System}, description={an international standard in astronomy for storing images, tables, and metadata in disk files. See the IAU FITS Standard for details}}
 \newacronym{FrDF} {FrDF} {French Data Facility}
+\newacronym{FreeIPA} {FreeIPA} {is an integrated security information management solution}
 \newacronym{HEP} {HEP} { High Energy Physics}
+\newacronym{HTTP} {HTTP} {HyperText Transfer Protocol}
 \newacronym{HVAC} {HVAC} {Heating, Ventilation, and Air Conditioning}
 \newglossaryentry{Handle} {name={Handle}, description={The unique identifier assigned to a document uploaded to DocuShare}}
 \newacronym{IAU} {IAU} {International Astronomical Union}
 \newacronym{IDAC} {IDAC} {\gls{Independent Data Access Center}}
 \newacronym{IN2P3} {IN2P3} {Institut National de Physique Nucléaire et de Physique des Particules}
-\newacronym{IPA} {IPA} {FreeIPA is an integrated security information management solution}
+\newacronym{IPA} {IPA} {FreeIPA - Identity, Policy, Audit}
 \newacronym{IRIS} {IRIS} {e-Infrastructure for Research and Innovation for \gls{STFC}}
 \newacronym{ISO} {ISO} {Informaiton Security Officer}
 \newacronym{IT} {IT} {Information Technology}
 \newacronym{IaC} {IaC} {Infrastructure as Code}
+\newglossaryentry{Incident} {name={Incident}, description={An undesired event, which under slightly different circumstances, could have resulted in harm to people, damage to property, or loss to process}}
 \newglossaryentry{Independent Data Access Center} {name={Independent Data Access Center}, description={Externally supported and administered versions of the DAC to serve the full, or a limited subset of, the LSST data products and/or software to authorized users. }}
 \newacronym{LDM} {LDM} {LSST Data Management (Document \gls{Handle})}
 \newacronym{LDO} {LDO} {LSST Document \gls{Operations} (Document Handle)}
@@ -94,6 +105,7 @@
 \newglossaryentry{National Science Foundation} {name={National Science Foundation}, description={primary federal agency supporting research in all fields of fundamental science and engineering; NSF selects and funds projects through competitive, merit-based review}}
 \newacronym{OGA} {OGA} {Other Government Agencies}
 \newacronym{OPS} {OPS} {\gls{Operations}}
+\newacronym{OS} {OS} {Operating System}
 \newacronym{OSS} {OSS} {Observatory System Specifications; \gls{LSE}-30}
 \newglossaryentry{Object} {name={Object}, description={In LSST nomenclature this refers to an astronomical object, such as a star, galaxy, or other physical entity. E.g., comets, asteroids are also Objects but typically called a Moving Object or a Solar System Object (SSObject). One of the DRP data products is a table of Objects detected by LSST which can be static, or change brightness or position with time}}
 \newglossaryentry{Operations} {name={Operations}, description={The 10-year period following construction and commissioning during which the LSST Observatory conducts its survey}}
@@ -115,6 +127,8 @@
 \newacronym{RSP} {RSP} {Rubin \gls{Science Platform}}
 \newacronym{RTN} {RTN} {Rubin Technical Note}
 \newglossaryentry{Review} {name={Review}, description={Programmatic and/or technical audits of a given component of the project, where a preferably independent committee advises further project decisions, based on the current status and their evaluation of it. The reviews assess technical performance and maturity, as well as the compliance of the design and end product with the stated requirements and interfaces}}
+\newglossaryentry{Risk} {name={Risk}, description={The degree of exposure to an event that might happen to the detriment of a program, project, or other activity. It is described by a combination of the probability that the risk event will occur and the consequence of the extent of loss from the occurrence, or impact. Risk is an inherent part of all activities, whether the activity is simple and small, or large and complex}}
+\newglossaryentry{Risk Management} {name={Risk Management}, description={The art and science of planning, assessing, and handling future events to avoid unfavorable impacts on project cost, schedule, or performance to the extent possible. Risk management is a structured, formal, and disciplined activity focused on the necessary steps and planning actions to determine and control risks to an acceptable level. Risk Management is an event-based management approach to managing uncertainty}}
 \newacronym{SAL} {SAL} {Service Abstraction Layer}
 \newacronym{SLAC} {SLAC} {\gls{SLAC National Accelerator Laboratory}}
 \newglossaryentry{SLAC National Accelerator Laboratory} {name={SLAC National Accelerator Laboratory}, description={A national laboratory funded by the US Department of Energy (DOE); SLAC leads a consortium of DOE laboratories that has assumed responsibility for providing the LSST camera. Although the Camera project manages its own schedule and budget, including contingency, the Camera team’s schedule and requirements are integrated with the larger Project.  The camera effort is accountable to the LSSTPO.}}
@@ -122,6 +136,7 @@
 \newacronym{SQR} {SQR} {SQuARE document handle}
 \newacronym{SRD} {SRD} {LSST Science Requirements; \gls{LPM}-17}
 \newacronym{SSID} {SSID} {Service Set Identifier}
+\newacronym{SSL} {SSL} {Secure Sockets Layer}
 \newacronym{STFC} {STFC} {UK Science and Technology Facilities Council}
 \newglossaryentry{Science Pipelines} {name={Science Pipelines}, description={The library of software components and the algorithms and processing pipelines assembled from them that are being developed by DM to generate science-ready data products from LSST images. The Pipelines may be executed at scale as part of LSST Prompt or Data Release processing, or pieces of them may be used in a standalone mode or executed through the Rubin Science Platform. The Science Pipelines are one component of the LSST Software Stack}}
 \newglossaryentry{Science Platform} {name={Science Platform}, description={A set of integrated web applications and services deployed at the LSST Data Access Centers (DACs) through which the scientific community will access, visualize, and perform next-to-the-data analysis of the LSST data products}}
@@ -140,7 +155,9 @@
 \newacronym{UK} {UK} {United Kingdom}
 \newacronym{UKDF} {UKDF} {United Kingdom Data Facility}
 \newacronym{US} {US} {United States}
+\newacronym{USB} {USB} {Universal Serial Bus}
 \newacronym{USDF} {USDF} {United States Data Facility}
+\newacronym{UTC} {UTC} {Coordinated Universal Time}
 \newacronym{VLAN} {VLAN} { Virtual Local Area Network}
 \newacronym{VPN} {VPN} {virtual private network}
 \newacronym{VRO} {VRO} {(not to be used)Vera C. Rubin Observatory}
@@ -159,8 +176,11 @@
 \newglossaryentry{middleware} {name={middleware}, description={Software that acts as a bridge between other systems or software usually a database or network. Specifically in the Data Management System this refers to Butler for data access and Workflow management for distributed processing.}}
 \newglossaryentry{monitoring} {name={monitoring}, description={In DM QA, this refers to the process of collecting, storing, aggregating and visualizing metrics}}
 \newglossaryentry{nublado} {name={nublado}, description={The service underpinning the Notebook Aspect of the Rubin Science Platform}}
+\newglossaryentry{patch} {name={patch}, description={An quadrilateral sub-region of a sky tract, with a size in pixels chosen to fit easily into memory on desktop computers}}
 \newglossaryentry{script queue} {name={script queue}, description={A CSC which manages SAL scripts, running one script at a time until the queue is exhausted or paused}}
 \newglossaryentry{shape} {name={shape}, description={In reference to a Source or Object, the shape is a functional characterization of its spatial intensity distribution, and the integral of the shape is the flux. Shape characterizations are a data product in the DIASource, DIAObject, Source, and Object catalogs}}
+\newglossaryentry{sky map} {name={sky map}, description={A sky tessellation for LSST. The Stack includes software to define a geometric mapping from the representation of World Coordinates in input images to the LSST sky map. This tessellation is comprised of individual tracts which are, in turn, comprised of patches}}
 \newglossaryentry{software} {name={software}, description={The programs and other operating information used by a computer.}}
 \newglossaryentry{test stand} {name={test stand}, description={An environment used for testing the operation of the LSST Camera, or some component thereof. In the Data Management context, this generally refers to a simulated Camera readout system used to test the interface between the Camera and the DM system (see, for example, NTS)}}
+\newglossaryentry{tract} {name={tract}, description={A portion of sky, a spherical convex polygon, within the LSST all-sky tessellation (sky map). Each tract is subdivided into sky patches}}
 \newglossaryentry{transient} {name={transient}, description={A transient source is one that has been detected on a difference image, but has not been associated with either an astronomical object or a solar system body}}
