@@ -94,6 +94,22 @@ We intend to have a hybrid access model for the archive where  the \gls{RSP} use
 Post embargo FrDF keeps a full copy of the raw data.
 
 
+\subsubsection{Development and Integration  \gls{Enclave}}
+Rubin Observatory and \gls{USDF} staff will use this enclave to build and test new versions of software and services to be deployed in the other enclaves.
+
+\paragraph{Threats and Security infrastructure}
+
+\begin{itemize}
+\item Developers have a higher level of access than most users.
+This is a necessary and accepted risk.
+\item All developers must adhere to  SLAC access rules e.g. FACTS checking etc.
+\end{itemize}
+
+\paragraph{Disaster recovery}
+SLAC keep tape backups.
+
+All code is deployed using Chef or containers and hence fairly easily recoverable in case of catastrophic failure.
+
 
 \subsection{ USDF \gls{DAC} Enclave}
 The USDF DAC is hosted on Google and  is the responsibility of SLAC.
@@ -135,22 +151,6 @@ We will not start work on this until near the start of operations.
 \end{itemize}
 \subsubsection{Disaster recovery}
 The Chile disaster recovery plan will cover the Chile \gls{DAC} \citeds{ittn-055}.
-
-\subsection{Development and Integration  \gls{Enclave}}
-Rubin Observatory and \gls{USDF} staff will use this enclave to build and test new versions of software and services to be deployed in the other enclaves.
-
-\subsubsection{Threats and Security infrastructure}
-
-\begin{itemize}
-\item Developers have a higher level of access than most users.
-This is a necessary and accepted risk.
-\item All developers must adhere to  SLAC access rules e.g. FACTS checking etc.
-\end{itemize}
-
-\subsubsection{Disaster recovery}
-SLAC keep tape backups.
-
-All code is deployed using Chef or containers and hence fairly easily recoverable in case of catastrophic failure.
 
 
 
