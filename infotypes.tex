@@ -1,0 +1,27 @@
+\section{Information types in Rubin Observatory} \label{sec:infotypes}
+
+\VRO is an open source project with no confidentiality requirements on the software.
+The software project’s integrity requirements are met through the combination of
+processes and controls which provide verified user access and protected credentials.
+The majority of software testing is conducted using open simulated and observational data sets.
+
+All data, after the embargo period,  is classified as Internal for two years before it becomes public.
+Internal here means available to data rights holders as per \citeds{RDO-013}.
+Data rights holders are instructed not to disseminate data outside of the collaboration.
+This is the customary protection for this data in the field of optical astronomy.
+
+\subsection{Presence of controlled information}\label{sec:cui}
+Rubin observatory data is not considered \gls{CUI}, however we have been asked to embargo data for eighty hours and up to ten days for some images.
+
+\subsection{Controlled Catalog}\label{sec:controllescat}
+To avoid alerting on certain man made objects Rubin has access to a catalog which is considered \gls{OUO}.
+This catalog is held only in a secure enclave within S3DF.
+All access to it is via queries into that system for specific times and positions.
+
+\subsection{Embargoed Data} \label{sec:embargo}
+While pixel data is embargoed it is kept on encrypted disks within the embargo rack in S3DF.
+This is in a locked rack with limited access and observed by cameras.
+
+\subsection{Unembargoed Data}
+Once the pixel data reaches its embargo age it moves to the main S3Df enclave where it is no longer encrypted and is available to data rights holders. It is still not public but is no longer of a sensitive nature.
+
