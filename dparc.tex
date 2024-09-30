@@ -18,7 +18,12 @@ These enclaves are further described here and for each a series of subsections e
 \item Disaster recovery
 \end{enumerate}
 
-\subsection{Prompt \gls{Enclave}} \label{sec:promptenc}
+\subsection{US Data Facility}\label{sec:usdf}
+
+A number of enclaves are within the the USDF.
+Maintenance and Security of these system falls to SLAC IT.
+
+\subsubsection{Prompt \gls{Enclave}} \label{sec:promptenc}
 
 The Prompt enclave receives images from the Observatory facilities in Chile via a Long Haul Network connection.
 It stores these and processes them into Prompt data products of three main types:
@@ -34,7 +39,7 @@ Delayed science images, as identified by the agencies, are released after their 
 
 All Prompt data products are checked for quality by automated systems but also by human operators from the Rubin Observatory staff, who have access to all images and data products in order to perform spot checks or follow ups.
 
-\subsubsection{ Threats and Security infrastructure}
+\paragraph{ Threats and Security infrastructure}
 The obvious threat surfaces here are :
 \begin{enumerate}
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
@@ -44,17 +49,22 @@ The obvious threat surfaces here are :
 \item The for the initial 10 days (30 in commissioning) after acquisition the data is maintain on encrypted disks with in the restricted \gls{OGA} rack.
 \end{enumerate}
 
-\subsubsection{Disaster recovery}
+\paragraph{Disaster recovery}
 All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
 In the case of a total wipe out of the \gls{OGA} systems use of Chef, docker etc allow redeployment rapidly.
 See also the \gls{SLAC} Rubin disaster recovery plan \citeds{RTN-078}.
 The back up for the embargoed data is the Chile OGA rack.
 
-\subsection{ Offline Production  \gls{Enclave}}
+\subsubsection{Satellite Catalog Sub-\gls{Enclave}} \label{sec:satcat}
+This enclave holds the only \gls{OUO} data on the project.
+\paragraph{ Threats and Security infrastructure}
+\paragraph{Disaster recovery}
+
+\subsubsection{ Offline Production  \gls{Enclave}}
 Each year (or more frequently), the Offline Production enclave takes the raw images accumulated to date in the Archive and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the Archive and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the \gls{FrDF} and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
 
 
-\subsubsection{ Threats and Security infrastructure}
+\paragraph{ Threats and Security infrastructure}
 \begin{itemize}
 \item Offline production data is no longer embargoed ergo not considered under threat.
 \item Although data exchange among the facilities uses encryption (secure HTTP over TLS), if data were to be intercepted in transfer between sites, this could only occur after the embargo period hence the security risk is low.
@@ -62,10 +72,10 @@ Each year (or more frequently), the Offline Production enclave takes the raw ima
 We are using standard tooling from \gls{HEP} which has been in use for many years and gives a level confidence of their suitability in this scientific endeavor.
 Still internal users remain a major risk - we maintain an inclusive project and try to avoid disgruntled team members.
 \end{itemize}
-\subsubsection{Disaster recovery}
+\paragraph{Disaster recovery}
 Post embargo FrDF keeps a full copy of the raw data.
 
-\subsection{ \gls{Archive}  Enclave}
+\subsubsection{ \gls{Archive}  Enclave}
 The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
 As the permanent scientific record of the survey, no more than 1\% of the raw images or telemetry may be lost or corrupted according to Rubin requirements.
 
@@ -74,18 +84,21 @@ To help ensure this, the French Data Facility maintains a disaster recovery copy
 We intend to have a hybrid access model for the archive where  the \gls{RSP} users and user processing will be on Google cloud while the data resides at SLAC. A cache of images will be held on Google with a dedicated client pulling needed images from SLAC to google.
 
 
-\subsubsection{ Threats and Security infrastructure}
+\paragraph{ Threats and Security infrastructure}
 
 \begin{itemize}
 \item Archive data is no longer embargoed ergo not considered under threat.
 \item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC for processing and archive and the more public facing \gls{RSP}.
 \end{itemize}
-\subsubsection{Disaster recovery}
+\paragraph{Disaster recovery}
 Post embargo FrDF keeps a full copy of the raw data.
 
 
 
 \subsection{ USDF \gls{DAC} Enclave}
+The USDF DAC is hosted on Google and  is the responsibility of SLAC.
+All deployments on the USDF DAC are made by SQuaRE using Phalanx.
+
 Data rights holders will use the services and systems in this enclave to work with the survey data products.
 It is therefore a general-purpose scientific computing facility. Generally users will interact with the Rubin Science Platform (\gls{RSP}), which is composed of a web-based Portal Aspect providing a guided user interface for accessing and analyzing the data, a Notebook Aspect providing an interactive, flexible, programming-oriented interface, and an API Aspect providing an programmable access service.
 Users of the DAC may connect from anywhere in the world over the Internet; all such users will be authenticated before accessing any \gls{RSP} service.
