@@ -21,7 +21,7 @@ These enclaves are further described here and for each a series of subsections e
 \subsection{US Data Facility}\label{sec:usdf}
 
 A number of enclaves are within the USDF.
-Maintenance and Security of these system falls to SLAC IT.
+Responsibility for the design, operations, maintenance, and security of these system is held by the USDF Lead at SLAC, who may delegate certain functions to the USDF Deputy Lead, USDF Technical Lead, other USDF staff, S3DF staff, and SLAC IT staff.
 
 \subsubsection{Prompt \gls{Enclave}} \label{sec:promptenc}
 
@@ -60,8 +60,9 @@ In the case of a total wipe out of the Prompt Enclave systems, use of Chef, Kube
 See also the USDF Disaster Recovery Plan \citeds{RTN-078}.
 
 \subsubsection{Satellite Catalog Sub-\gls{Enclave}} \label{sec:satcat}
-This enclave holds the only \gls{OUO} data on the project, a file containing a catalog of satellite orbit information.
-Access to this data is limited to a highly vetted list of administrators and operators who are a small subset of Rubin staff.
+This enclave holds the only \gls{OUO} data on the project, a catalog of satellite orbit information.
+This catalog will be held on two dedicated servers (for availability) within the Embargo Rack.
+Access to these servers is limited to a highly vetted list of administrators and operators, including the USDF Lead, USDF Deputy Lead, and USDF Technical Lead, who are a (very) small subset of Rubin staff.
 
 \paragraph{ Threats and Security infrastructure}
 \begin{enumerate}
@@ -73,6 +74,10 @@ Access to this data is limited to a highly vetted list of administrators and ope
 Since the catalog is downloaded at startup and periodically, it will be refreshed automatically after any disaster.
 
 \subsubsection{ Offline Production  \gls{Enclave}}
+
+The Offline Production enclave holds data that is not embargoed but is not yet released to the data rights community.
+Access to this data is limited to Rubin staff.
+
 Each year (or more frequently), the Offline Production enclave takes the raw images accumulated to date in the Archive and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the Archive and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the \gls{FrDF} and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
 
 
