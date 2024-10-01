@@ -11,17 +11,19 @@ Data rights holders are instructed not to disseminate data outside of the collab
 This is the customary protection for this data in the field of optical astronomy.
 
 \subsection{Presence of controlled information}\label{sec:cui}
-Rubin observatory data is not considered \gls{CUI}, however we have been asked to embargo data for eighty hours and up to ten days for some images.
+Rubin observatory data is not considered \gls{CUI}, however we have been asked to embargo pixel data for 80 hours during Operations and for 30 days during Commissioning, with the ability to extend the embargo for designated images.
 
 \subsection{Controlled Catalog}\label{sec:controllescat}
-To avoid alerting on certain man made objects Rubin has access to a catalog which is considered \gls{OUO}.
+To avoid alerting on certain man made objects Rubin has access to a satellite catalog which is considered \gls{OUO}.
 This catalog is held only in a "Satellite Catalog Sub-Enclave" inside the "Embargo Rack" within S3DF.
 All access to it is via queries into that system for specific times and positions.
 
 \subsection{Embargoed Data} \label{sec:embargo}
-While pixel data is embargoed it is kept on encrypted disks within the embargo rack in S3DF.
+While pixel data is embargoed it is kept on encrypted storage within the embargo rack in S3DF.
 This is in a locked rack with limited access and observed by cameras.
+Access is only available to Rubin and Commissioning staff.
 
 \subsection{Unembargoed Data}
-Once the pixel data reaches its embargo age it moves to the main S3Df enclave where it is no longer encrypted and is available to data rights holders. It is still not public but is no longer of a sensitive nature.
+Once the pixel data reaches its embargo age it moves to the Archive Enclave within S3DF where it is no longer encrypted and is available to data rights holders. It is still not public but is no longer of a sensitive nature.
 
+Similarly, data products generated within the Offline Production Enclave are restricted to staff until they are released, at which point they move to the Archive Enclave and are made available to data rights holders.
