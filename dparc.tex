@@ -20,19 +20,21 @@ These enclaves are further described here and for each a series of subsections e
 
 \subsection{US Data Facility}\label{sec:usdf}
 
-A number of enclaves are within the the USDF.
+A number of enclaves are within the USDF.
 Maintenance and Security of these system falls to SLAC IT.
 
 \subsubsection{Prompt \gls{Enclave}} \label{sec:promptenc}
 
-The Prompt enclave receives images from the Observatory facilities in Chile via a Long Haul Network connection.
+The Prompt enclave holds and processes pixel data that is subject to embargo, meaning that it is to be accessed only by Rubin and Commissioning staff, not by the Rubin data rights community.
+
+It receives images from the Observatory facilities in Chile via a Long Haul Network connection.
 It stores these and processes them into Prompt data products of three main types:
 alerts for things that have moved or changed, measurement catalogs, and processed images.
 The alerts can be further subdivided into \emph{streak} alerts for objects that have moved a long distance and \emph{non-streak} alerts for all other objects.
 Measurements in the catalogs follow the same subdivision. Images may be \gls{Commissioning} images used for testing and characterizing the Observatory systems, normal science images without significant \emph{streaks}, or delayed science images that do contain significant \emph{streaks}.
 
-\emph{Streak} alerts found in the \gls{OUO} catalog at SLAC will not be released.
-Uncatalogued \emph{Streak} alerts agreed with \gls{JPL} \gls{NEO} group  are to be published at least to \gls{MPC}.
+\emph{Streak} alerts corresponding to satellites in the \gls{OUO} catalog at SLAC will not be released.
+Uncatalogued \emph{Streak} alerts agreed with the \gls{JPL} \gls{NEO} group  are to be published at least to \gls{MPC}.
 \emph{Non-streak} alerts are to be published to the world at large within 60 seconds of the original raw image being taken.
 Normal science images are made available to data rights holders in the \gls{DAC} after an 80 hour embargo period.
 Delayed science images, as identified by the agencies, are released after their specific embargo period. Commissioning images are made available to data rights holders after a 30 day embargo period.
@@ -43,22 +45,32 @@ All Prompt data products are checked for quality by automated systems but also b
 The obvious threat surfaces here are :
 \begin{enumerate}
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
-\item Transmission to \gls{LLNL}.  This will be over internet using TLS.
+\item Transmission to \gls{JPL}.  This transmission will only include measurements of potential NEOs, not pixel data, and will be over internet using TLS.
+\item Pipeline access for Prompt Processing. The pipelines will run on resources dedicated to the Prompt Enclave and without external Internet connections for the duration of the processing, mitigating external, intra-node, and side channel attacks.
 \item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu SLAC security policies\footnote{\url{https://it.slac.stanford.edu/cybersecurity/compliance}}.
-\item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC \gls{VPN} and 2FA. These tools are also only accessible by staff and probably pose a low risk.
-\item The for the initial 10 days (30 in commissioning) after acquisition the data is maintain on encrypted disks with in the restricted \gls{OGA} rack.
+\item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC authentication (including 2FA), Rubin authorization (via Gafaelfawr \citeds{DMTN-234}) and the S3DF HTTPS Ingress. These tools are also only accessible by staff and probably pose a low risk.
+\item Physical access to storage.  For the initial 80 hours (30 days in commissioning) after acquisition the data is maintain on encrypted storage with in the physically locked Embargo rack.
 \end{enumerate}
 
 \paragraph{Disaster recovery}
-All embargoed data is also stored on a secure server in Chile hence it can be retransmitted as needed.
-In the case of a total wipe out of the \gls{OGA} systems use of Chef, docker etc allow redeployment rapidly.
-See also the \gls{SLAC} Rubin disaster recovery plan \citeds{RTN-078}.
-The back up for the embargoed data is the Chile OGA rack.
+All embargoed raw data is also stored on a secure server in Chile as part of the Observatory Operations Data Service (OODS), hence it can be retransmitted as needed.
+For a limited time greater than 80 hours, embargoed raw data is also available from the LSSTCam Camera Control System, giving a third data location during the Operations embargo period.
+Embargoed data products can be regenerated from the raw data.
+In the case of a total wipe out of the Prompt Enclave systems, use of Chef, Kubernetes, etc. allow rapid redeployment.
+See also the USDF Disaster Recovery Plan \citeds{RTN-078}.
 
 \subsubsection{Satellite Catalog Sub-\gls{Enclave}} \label{sec:satcat}
-This enclave holds the only \gls{OUO} data on the project.
+This enclave holds the only \gls{OUO} data on the project, a file containing a catalog of satellite orbit information.
+Access to this data is limited to a highly vetted list of administrators and operators who are a small subset of Rubin staff.
+
 \paragraph{ Threats and Security infrastructure}
+\begin{enumerate}
+\item Catalog retrieval.  The catalog is downloaded from an external source via HTTPS.  Connections originate in the Sub-Enclave from a dedicated server and are authenticated and authorized via a service account provided by the external source.  This minimizes access to the catalog in transit and avoids intra-node and side channel attacks on the catalog service.
+\item Catalog lookup.  The catalog is held in the memory of a service that provides match/no match results for each streak measurement in a list.  The service is only accessible by S3DF systems, not the Internet.  This minimizes attacks via the service API and prevents attacks via storage.
+\end{enumerate}
+
 \paragraph{Disaster recovery}
+Since the catalog is downloaded at startup and periodically, it will be refreshed automatically after any disaster.
 
 \subsubsection{ Offline Production  \gls{Enclave}}
 Each year (or more frequently), the Offline Production enclave takes the raw images accumulated to date in the Archive and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the Archive and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the \gls{FrDF} and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
@@ -66,20 +78,22 @@ Each year (or more frequently), the Offline Production enclave takes the raw ima
 
 \paragraph{ Threats and Security infrastructure}
 \begin{itemize}
-\item Offline production data is no longer embargoed ergo not considered under threat.
+\item Offline production data is no longer embargoed ergo not considered under threat.  Early release of data to the data rights community or even release of small amounts of data to the world at large is more of a "science" problem, less a "security" problem.
 \item Although data exchange among the facilities uses encryption (secure HTTP over TLS), if data were to be intercepted in transfer between sites, this could only occur after the embargo period hence the security risk is low.
 \item Malicious users could disrupt data or processing.
 We are using standard tooling from \gls{HEP} which has been in use for many years and gives a level confidence of their suitability in this scientific endeavor.
 Still internal users remain a major risk - we maintain an inclusive project and try to avoid disgruntled team members.
 \end{itemize}
 \paragraph{Disaster recovery}
-Post embargo FrDF keeps a full copy of the raw data.
+The Offline Production systems run in batch and Kubernetes and can be reconstituted after a disaster.
+The data being processed can be regenerated from the Archive Enclave below.
+
 
 \subsubsection{ \gls{Archive}  Enclave}
 The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
 As the permanent scientific record of the survey, no more than 1\% of the raw images or telemetry may be lost or corrupted according to Rubin requirements.
 
-To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and selected data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.
+To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and selected data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.  Raw images and key data products are also stored on tape backup at SLAC.
 
 We intend to have a hybrid access model for the archive where  the \gls{RSP} users and user processing will be on Google cloud while the data resides at SLAC. A cache of images will be held on Google with a dedicated client pulling needed images from SLAC to google.
 
@@ -87,7 +101,7 @@ We intend to have a hybrid access model for the archive where  the \gls{RSP} use
 \paragraph{ Threats and Security infrastructure}
 
 \begin{itemize}
-\item Archive data is no longer embargoed ergo not considered under threat.
+\item Archive data is no longer embargoed ergo not considered under threat.  Early release of data to the data rights community or even release of small amounts of data to the world at large is more of a "science" problem, less a "security" problem.
 \item We will have a lot of users which could be problematic. Keeping the data rights holders on the cloud allows a clean separation of concerns between SLAC for processing and archive and the more public facing \gls{RSP}.
 \end{itemize}
 \paragraph{Disaster recovery}
@@ -100,15 +114,15 @@ Rubin Observatory and \gls{USDF} staff will use this enclave to build and test n
 \paragraph{Threats and Security infrastructure}
 
 \begin{itemize}
-\item Developers have a higher level of access than most users.
+\item Developers have a higher level of access than data rights holders.
 This is a necessary and accepted risk.
-\item All developers must adhere to  SLAC access rules e.g. FACTS checking etc.
+\item All developers must have SLAC accounts and therefore adhere to SLAC access rules e.g. FACTS checking etc.
 \end{itemize}
 
 \paragraph{Disaster recovery}
 SLAC keep tape backups.
 
-All code is deployed using Chef or containers and hence fairly easily recoverable in case of catastrophic failure.
+All code is deployed using Kubernetes or Chef and hence fairly easily recoverable in case of catastrophic failure.
 
 
 \subsection{ USDF \gls{DAC} Enclave}
@@ -117,7 +131,7 @@ All deployments on the USDF DAC are made by SQuaRE using Phalanx.
 
 Data rights holders will use the services and systems in this enclave to work with the survey data products.
 It is therefore a general-purpose scientific computing facility. Generally users will interact with the Rubin Science Platform (\gls{RSP}), which is composed of a web-based Portal Aspect providing a guided user interface for accessing and analyzing the data, a Notebook Aspect providing an interactive, flexible, programming-oriented interface, and an API Aspect providing an programmable access service.
-Users of the DAC may connect from anywhere in the world over the Internet; all such users will be authenticated before accessing any \gls{RSP} service.
+Users of the DAC may connect from anywhere in the world over the Internet; all such users will be authenticated and authorized before accessing any \gls{RSP} service.
 The \gls{RSP} is hosted on a cloud service, currently  Google Cloud Platform.
 
 The DAC retrieves the released data products from the \gls{Archive} Enclave via protocols and services authenticated at a service account level only. While end-user identities may be included for audit and accounting purposes, fundamentally the DAC exists to provide access to all \gls{Archive} contents.
@@ -135,7 +149,7 @@ These are governed by \gls{SLAC} security.
 \subsubsection{Disaster recovery}
 For user  spaces we rely on cloud provider redundancy/backup/recovery.
 
-Our data is cached a full copy is always held at the \gls{USDF} hence any Rubin data at the DAC is expendable.
+The data in the cloud is merely a cache; a full copy is always held at the \gls{USDF} hence any Rubin data at the DAC is expendable.
 
 Further considerations are covered in \citeds{rtn-059}.
 
@@ -159,6 +173,8 @@ The Chile disaster recovery plan will cover the Chile \gls{DAC} \citeds{ittn-055
 A full back up of the raw data will also be held there.
 The IN2P3 computing infrastructure is described in \url{https://doc.lsst.eu/}.
 \subsubsection{Threats and Security infrastructure}
+The considerations for this Enclave are a combination of those for the Offline Production Enclave and Archive Enclave.
+Access will be granted only to IN2P3 staff and Rubin staff.
 IN2P3 have their own cyber security procedures which will be adhered to.
 \subsubsection{Disaster recovery}
 All Raw data is also at SLAC and can be resent over a period of time.
@@ -166,6 +182,8 @@ All Raw data is also at SLAC and can be resent over a period of time.
 \subsection{UKDF Processing  \gls{Enclave}}
 25\% of processing will be done on \gls{IRIS}.
 \subsubsection{Threats and Security infrastructure}
+The considerations for this Enclave are a combination of those for the Offline Production Enclave and Archive Enclave.
+Access will be granted only to UKDF staff and Rubin staff.
 UKDF have their own cyber security procedures which will be adhered to.
 \subsubsection{Disaster recovery}
 All Raw data is at IN2P3 and can be resent over a period of time.
@@ -173,7 +191,7 @@ All Raw data is at IN2P3 and can be resent over a period of time.
 
 \subsection{External entities}
 There are a number of \gls{IDAC}s which will have and serve catalogs and or images.
-These are within our realm of security to some extend but not entirely - we rely on trust at some level.
+These are within our realm of security to some extent but not entirely - we rely on trust at some level.
 \subsubsection{Threats and Security infrastructure}
 The obvious threat here is unauthorized access to the data rights accessible data.
 Any IDAC must adhere to our user access protocols so this should not happen.
