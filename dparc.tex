@@ -5,7 +5,7 @@
 The overall system architecture is available in \citeds{LDM-148}.
 Details on the \gls{USDF} specifications are given in \citeds{DMTN-189}.
 
-\secref{sec:desc} gives a high level overview of the system, architecturally we look
+\secref{sec:desc} gives a high level overview of the system. Architecturally we look
 at this as a set of enclaves.
 As images are processed in the Prompt and Offline Production enclaves, their resulting data products are stored in the \gls{Archive} enclave and made available to the \gls{DAC} enclave where data rights holders can access and analyze them.
 In addition, Rubin Observatory staff will use the Development/Integration enclave to maintain the Observatory's \gls{software} tools and systems and to develop new versions of them.
@@ -48,7 +48,7 @@ The obvious threat surfaces here are :
 \begin{enumerate}
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
 \item Transmission to \gls{JPL}.  This transmission will only include measurements of potential NEOs, not pixel data, and will be over internet using \gls{TLS}.
-\item Pipeline access for Prompt Processing. The pipelines will run on resources dedicated to the Prompt \gls{Enclave} and without external Internet connections for the duration of the processing, mitigating external, intra-node, and side channel attacks.
+\item Pipeline access for Prompt Processing. The pipelines will run on resources dedicated to the Prompt \gls{Enclave} and without direct external Internet connections for the duration of the processing, mitigating external, intra-node, and side channel attacks.
 \item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu \gls{SLAC} security policies\footnote{\url{https://it.slac.stanford.edu/cybersecurity/compliance}}.
 \item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC authentication (including 2FA), Rubin authorization (via Gafaelfawr \citeds{DMTN-234}) and the S3DF HTTPS Ingress. These tools are also only accessible by staff and probably pose a low risk.
 \item Physical access to storage.  For the initial 80 hours (30 days in commissioning) after acquisition the data is maintain on encrypted storage with in the physically locked Embargo rack.
@@ -85,7 +85,7 @@ Each year (or more frequently), the Offline Production enclave takes the raw ima
 
 \paragraph{ Threats and Security infrastructure}
 \begin{itemize}
-\item Offline production data is no longer embargoed ergo not considered under threat.  Early release of data to the data rights community or even release of small amounts of data to the world at large is more of a "science" problem, less a "security" problem.
+\item Offline production data is no longer embargoed ergo not considered under threat.  Early release of data to the data rights community or even release of small amounts of data to the world at large is more of a ``science'' problem, less a ``security'' problem.
 \item Although data exchange among the facilities uses encryption (secure HTTP over \gls{TLS}), if data were to be intercepted in transfer between sites, this could only occur after the embargo period hence the security risk is low.
 \item Malicious users could disrupt data or processing.
 We are using standard tooling from \gls{HEP} which has been in use for many years and gives a level confidence of their suitability in this scientific endeavor.
@@ -97,23 +97,18 @@ The data being processed can be regenerated from the \gls{Archive} Enclave below
 
 
 \subsubsection{ \gls{Archive}  Enclave}
-The raw images, data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
+The raw images, released data products, and other records of the survey such as commands, events, and telemetry from Observatory systems are all stored in the \gls{Archive}.
 As the permanent scientific record of the survey, no more than 1\% of the raw images or telemetry may be lost or corrupted according to Rubin requirements.
 
 To help ensure this, the French Data Facility maintains a disaster recovery copy of all raw images and selected data products. Additional copies of some raw images and data products will be stored in Observatory systems in Chile.  Raw images and key data products are also stored on tape backup at \gls{SLAC}.
 
-We intend to have a hybrid access model for the archive where  the \gls{RSP} users and user processing will be on Google \gls{cloud} while the data resides at SLAC. A cache of images will be held on Google with a dedicated client pulling needed images from SLAC to google.
-
-
 \paragraph{ Threats and Security infrastructure}
 
 \begin{itemize}
-\item \gls{Archive} data is no longer embargoed ergo not considered under threat.  Early release of data to the data rights community or even release of small amounts of data to the world at large is more of a "science" problem, less a "security" problem.
-\item We will have a lot of users which could be problematic. Keeping the data rights holders on the \gls{cloud} allows a clean separation of concerns between SLAC for processing and archive and the more public facing \gls{RSP}.
+\item \gls{Archive} data is no longer embargoed ergo not considered under threat.  All Archive data becomes public after the two year proprietary period, so any disclosure of small portions to the world at large is a premature release and not really a security issue.
 \end{itemize}
 \paragraph{Disaster recovery}
 Post embargo \gls{FrDF} keeps a full copy of the raw data.
-
 
 \subsubsection{Development and Integration  \gls{Enclave}}
 Rubin Observatory and \gls{USDF} staff will use this enclave to build and test new versions of \gls{software} and services to be deployed in the other enclaves.
@@ -150,15 +145,21 @@ Hosting it on a cloud provider reduces risk considerably for the \gls{Archive} e
 \citeds{SQR-041} provides a risk assessment for the \gls{RSP}.
 \citeds{DMTN-193} provides a more in depth web risk analysis.
 
-Backend archive services could provide another attack surface.
-These are governed by \gls{SLAC} security.
+\begin{itemize}
+\item We will have a lot of users which could be problematic. Keeping the data rights holders on the \gls{cloud} allows a clean separation of concerns between SLAC for processing and archive and the more public facing \gls{RSP}.
+
+\item Backend archive services could provide another attack surface.  These are governed by \gls{SLAC} security.
+\end{itemize}
 
 \subsubsection{Disaster recovery}
+For the software and deployed systems, all information needed to reconstitute the US DAC is stored in public repositories of container images and configuration files.
+
 For user  spaces we rely on \gls{cloud} provider redundancy/backup/recovery.
 
 The data in the cloud is merely a cache; a full copy is always held at the \gls{USDF} hence any Rubin data at the \gls{DAC} is expendable.
 
 Further considerations are covered in \citeds{rtn-059}.
+
 
 \subsection{ Chile \gls{DAC} Enclave}
 This proposed \gls{DAC} in Chile is covered in \cite{LDM-572}.
