@@ -49,7 +49,7 @@ The obvious threat surfaces here are :
 \item Transmission of Data from Chile. IPSec built into the routers will be used on the \gls{LHN}. \citeds{DMTN-108} discusses threats in this realm a little more.
 \item Transmission to \gls{JPL}.  This transmission will only include measurements of potential NEOs, not pixel data, and will be over internet using \gls{TLS}.
 \item Pipeline access for Prompt Processing. The pipelines will run on resources dedicated to the Prompt \gls{Enclave} and without direct external Internet connections for the duration of the processing, mitigating external, intra-node, and side channel attacks.
-\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu \gls{SLAC} security policies\footnote{\url{https://it.slac.stanford.edu/cybersecurity/compliance}}.
+\item Staff access for \gls{QA}. All the usual user threats such as phishing apply - these users are however governed bu \gls{SLAC} security policies\footnote{\url{https://policies.slac.stanford.edu/} see also \url{https://it.slac.stanford.edu/cybersecurity/compliance}}.
 \item QA tools. The web accessible QA tools should have a threat analysis performed by SLAC or our Security consultants although they will be behind SLAC authentication (including 2FA), Rubin authorization (via Gafaelfawr \citeds{DMTN-234}) and the S3DF HTTPS Ingress. These tools are also only accessible by staff and probably pose a low risk.
 \item Physical access to storage.  For the initial 80 hours (30 days in commissioning) after acquisition the data is maintain on encrypted storage with in the physically locked Embargo rack.
 \end{enumerate}
