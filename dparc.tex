@@ -7,10 +7,10 @@ Details on the \gls{USDF} specifications are given in \citeds{DMTN-189}.
 
 \secref{sec:desc} gives a high level overview of the system. Architecturally we look
 at this as a set of zones, each of which is allocated compute, storage, and networking.
-As images are processed in the Prompt and Offline Production zones, their resulting data products are stored in the \gls{Archive} zone and made available to the \gls{DAC} \gls{zone} where data rights holders can access and analyze them.
-In addition, Rubin Observatory staff will use the Development/Integration zone to maintain the Observatory's \gls{software} tools and systems and to develop new versions of them.
+As images are processed in the Prompt and Offline Production zones, their resulting data products are stored in the \gls{Archive} \gls{Zone} and made available to the \gls{DAC} \gls{Zone} where data rights holders can access and analyze them.
+In addition, Rubin Observatory staff will use the Development/Integration \gls{Zone} to maintain the Observatory's \gls{software} tools and systems and to develop new versions of them.
 
-These zone are further described here and for each a series of subsections explore :
+These zones are further described here and for each a series of subsections explore :
 
 
 \begin{enumerate}
@@ -20,14 +20,14 @@ These zone are further described here and for each a series of subsections explo
 
 \subsection{US Data Facility}\label{sec:usdf}
 
-A number of zone are within the \gls{USDF}.
+A number of zones are within the \gls{USDF}.
 Responsibility for the design, operations, maintenance, and security of these systems is held by the \gls{USDF} Lead at SLAC, who may delegate certain functions to the \gls{USDF} Deputy Lead, \gls{USDF} Technical Lead, other \gls{USDF} staff, S3DF staff, and SLAC IT staff.
 
 In particular, at present the USDF Technical Lead serves as the Rubin Information Systems Security Manager for all USDF systems.
 
 \subsubsection{Prompt Zone} \label{sec:promptenc}
 
-The Prompt Zone holds and processes pixel data that is subject to embargo, meaning that it is to be accessed only by Rubin and \gls{Commissioning} staff, not by the Rubin data rights community.
+The Prompt \gls{Zone} holds and processes pixel data that is subject to embargo, meaning that it is to be accessed only by Rubin and \gls{Commissioning} staff, not by the Rubin data rights community.
 
 It receives images from the Observatory facilities in Chile via a Long Haul Network connection.
 It stores these and processes them into Prompt data products of three main types:
@@ -62,7 +62,7 @@ In the case of a total wipe out of the Prompt Zone systems, use of Chef, \gls{Ku
 See also the \gls{USDF} Disaster Recovery Plan \citeds{RTN-078}.
 
 \subsubsection{Satellite Catalog Sub-Zone} \label{sec:satcat}
-This zone holds the only \gls{OUO} data on the project, a catalog of satellite orbit information.
+This \gls{Zone} holds the only \gls{OUO} data on the project, a catalog of satellite orbit information.
 This catalog will be held on two dedicated servers (for availability) within the Embargo Rack.
 Access to these servers is limited to a highly vetted list of administrators and operators, including the \gls{USDF} Lead, \gls{USDF} Deputy Lead, and \gls{USDF} Technical Lead, who are a (very) small subset of Rubin staff.
 
@@ -77,10 +77,10 @@ Since the catalog is downloaded at startup and periodically, it will be refreshe
 
 \subsubsection{ Offline Production Zone}
 
-The Offline Production zone holds data that is not embargoed but is not yet released to the data rights community.
+The Offline Production \gls{Zone} holds data that is not embargoed but is not yet released to the data rights community.
 Access to this data is limited to Rubin staff.
 
-Each year (or more frequently), the Offline Production zone takes the raw images accumulated to date in the \gls{Archive} and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the \gls{Archive} and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the \gls{FrDF} and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
+Each year (or more frequently), the Offline Production Zone takes the raw images accumulated to date in the \gls{Archive} and reprocesses them to generate highly accurate, consistent images and measurement catalogs, known as a Data Release. These data products are stored in the \gls{Archive} and made available to data rights holders in the DAC after they have been checked by automated systems and after Rubin Observatory staff has vetted, characterized, and documented them. Offline Production is split between the USDF and the \gls{FrDF} and UKDF. Each Data Facility performs part of the computations and exchanges its results with the others, so all have a complete set of data products at release time.
 
 
 \paragraph{ Threats and Security infrastructure}
