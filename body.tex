@@ -14,35 +14,25 @@ This security plan conforms with the construction era security documentation:
 Note has been taken of \cite{TCISSG}.
 
 During the ramp up to operations further security requirements were given to the project by the agencies.
-The response to these is in \gls{DMTN}-199\footnote{This is a limited availability document}.
+The response to these is in \gls{DMTN}-199.
 
 The \gls{RDM} department is concerned with the operations and maintenance  of Rubin constructed software, hardware and networks.
 Development remains open-source in nature.
 
 Data from the telescope on Cerro Pach\'{o}n is transmitted over Rubin controlled networks to \gls{SLAC} in  Menlo Park USA.
-After an agreed embargo period all data will be transmitted to the \gls{IN2P3} in Lyon, France, and at least some data is transmitted to the Royal Observatory Edinburgh.
-Processing occurs in all three locations using a coordinated release of the Rubin \gls{Science Pipelines}.
+After an agreed embargo period all raw data will be transmitted to the French Data Facility at the computing center for \gls{IN2P3} in Lyon, France, and at least some raw data is transmitted to the United Kingdom Data Facility operating on the IRIS infrastructure and in particular utilizing facilities at \gls{RAL} and Lancaster University.
+Processing occurs in all locations using a coordinated release of the Rubin \gls{Science Pipelines}.
 
 Access to data will be provided to authorized  users via a US \gls{DAC}.
 A data access center similar to the \gls{US} \gls{DAC} will also be provided in Chile.
 
-For data taken initially we have been requested to comply with \citeds{NIST.SP.800-171} the compliance matrix is provided in  \citeds{RTN-082}.
+For data taken initially we have been requested to comply with \citeds{NIST.SP.800-171}; the compliance matrix is provided in  \citeds{RTN-082}.
+SLAC is subject to \citeds{nist800-53}
 
 
-This document does not do a detailed threat analysis though this should be and is done for individual systems and \gls{Enclave}s. \cite{TCISSG} is good guide for software threats.
+This document does not do a detailed threat analysis though this should be and is done for individual systems and Zones. \cite{TCISSG} is a good guide for software threats.
 
-\section{Presence of controlled information}\label{sec:cui}
-\VRO is an open source project with no confidentiality requirements on the software.
-The software project’s integrity requirements are met through the combination of
-processes and controls which provide verified user access and protected credentials.
-The majority of software testing is conducted using open simulated and observational data sets.
-
-Rubin observatory data is not considered \gls{CUI}, however we have been asked to embargo data for eighty hours and up to ten days for some images.
-All data, after the embargo period,  is classified as Internal for two years before it becomes public.
-Internal here means available to data rights holders as per \citeds{RDO-013}.
-Data rights holders are instructed not to disseminate data outside of the collaboration.
-This is the customary protection for this data in the field of optical astronomy.
-
+\input{infotypes}
 \input{cyber}
 \input{system}
 \input{dparc}

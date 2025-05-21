@@ -5,4 +5,4 @@
 #
 # Example:
 #   MIA:Missing In Action
-ISO:Informaiton Security Officer
+CISO:Chief Information Security Officer

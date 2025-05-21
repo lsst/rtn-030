@@ -1,0 +1,31 @@
+\section{Information types in Rubin Observatory} \label{sec:infotypes}
+
+\VRO is an open source project with no confidentiality requirements on the \gls{software}.
+The \gls{software} project’s integrity requirements are met through the combination of
+processes and controls which provide verified user access and protected credentials.
+The majority of \gls{software} testing is conducted using open simulated and observational data sets.
+
+All data, after the embargo period,  is classified as Internal for two years before it becomes public.
+Internal here means available to data rights holders as per \citeds{RDO-013}.
+Data rights holders are instructed not to disseminate data outside of the collaboration.
+This is the customary protection for this data in the field of optical astronomy.
+
+\subsection{Presence of controlled information}\label{sec:cui}
+Rubin observatory data is not considered \gls{CUI}, however we have been asked to embargo pixel data for 80 hours during \gls{Operations} and for 30 days during Commissioning, with the ability to extend the embargo for designated images.
+
+\subsection{Controlled Catalog}\label{sec:controllescat}
+To avoid alerting on certain man-made objects Rubin has access to a satellite catalog which is designated \gls{CUI} \citeds{nist800-53} \emph{Moderate}.
+This catalog is held only in a ``Satellite Catalog Sub-Zone'' inside the ``Embargo Rack'' within \gls{S3DF}.
+All access to it is via queries into that system for specific times and positions.
+
+\subsection{Embargoed Data} \label{sec:embargo}
+While pixel data is embargoed it is kept on encrypted storage within the embargo rack in \gls{S3DF}.
+This is in a locked rack with limited access and observed by cameras.
+Access is only available to Rubin and \gls{Commissioning} staff.
+
+\subsection{Unembargoed Data}
+Once the raw pixel data reaches its embargo age it moves to the Archive Zone within \gls{S3DF} where it is available to data rights holders. It is still not public but is no longer of a sensitive nature.
+Prompt pixel image data products are released from embargo at the same time.
+
+\subsection{Unreleased Data}
+Data products generated within the Offline Production Zone are not embargoed, but they are restricted to staff until they are released, at which point they move to the Archive Zone and are made available to data rights holders.
